@@ -1,11 +1,14 @@
 
-import 'package:expensetracker/screens/sign_up.dart';
+import 'package:expensetracker/InitialScreens/sign_up.dart';
+
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+import '../customs/custom_text.dart';
 
 
 
@@ -80,15 +83,7 @@ class _LoginpageWidgetState extends State<LoginpageWidget>
                             borderRadius: BorderRadius.circular(16),
                           ),
                           alignment: const AlignmentDirectional(0, 0),
-                          child: const Text(
-                            'Expense Tracker',
-                            style: TextStyle(
-                              fontFamily: 'Plus Jakarta Sans',
-                              color: Colors.white,
-                              fontSize: 31,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
+                          child: const CustimText(text: 'Expense Tracker', size: 31, colour: Colors.white, fontWeight: FontWeight.w500,),
                         ),
                       ),
                       Padding(
@@ -118,16 +113,8 @@ class _LoginpageWidgetState extends State<LoginpageWidget>
                                 mainAxisSize: MainAxisSize.max,
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
-                                  const Text(
-                                    'Welcome Back',
-                                    textAlign: TextAlign.center,
-                                    style:TextStyle(
-                                      fontFamily: 'Plus Jakarta Sans',
-                                      color: Color(0xFF101213),
-                                      fontSize: 36,
-                                      fontWeight: FontWeight.w600,
-                                    ),
-                                  ),
+                                  const CustimText(text: 'Welcome Back', size: 36, colour: Color(0xFF101213), fontWeight: FontWeight.w600,),
+
                                   // const Padding(
                                   //   padding:  EdgeInsetsDirectional.fromSTEB(
                                   //       0, 12, 0, 24),
@@ -308,14 +295,8 @@ class _LoginpageWidgetState extends State<LoginpageWidget>
 
                                         ),
                                         child: const Center(
-                                          child:  Text('Log in',
-                                            style: TextStyle(
-                                              fontFamily: 'Plus Jakarta Sans',
-                                              color: Colors.white,
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.w500,
-                                            ),
-                                          ),
+                                          child:
+                                           CustimText(text: 'Log in', size: 16, colour: Colors.white, fontWeight: FontWeight.w500,),
                                         ),
                                       ),
                                     )
@@ -323,16 +304,8 @@ class _LoginpageWidgetState extends State<LoginpageWidget>
                                   const Padding(
                                     padding: EdgeInsetsDirectional.fromSTEB(
                                         16, 0, 16, 24),
-                                    child: Text(
-                                      'Or sign up with',
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                        fontFamily: 'Plus Jakarta Sans',
-                                        color: Color(0xFF57636C),
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w500,
-                                      ),
-                                    ),
+                                    child:
+                                    CustimText(text: 'Or sign up with', size: 16, colour:Color(0xFF57636C), fontWeight: FontWeight.w500,),
                                   ),
                                    Padding(
                                       padding: const EdgeInsetsDirectional.fromSTEB(
@@ -373,14 +346,8 @@ class _LoginpageWidgetState extends State<LoginpageWidget>
                                             children: const [
                                                Icon(FontAwesomeIcons.google ,size: 20,),
                                                Center(
-                                                child:  Text('Continue With Google',
-                                                  style: TextStyle(
-                                                    fontFamily: 'Plus Jakarta Sans',
-                                                    color: Color(0xFF101213),
-                                                    fontSize: 16,
-                                                    fontWeight: FontWeight.w500,
-                                                  ),
-                                                ),
+                                                child:
+                                                CustimText(text: 'Continue With Google', size: 16, colour: Colors.black, fontWeight: FontWeight.w500,),
                                               ),
                                             ],
                                           ),
@@ -397,27 +364,14 @@ class _LoginpageWidgetState extends State<LoginpageWidget>
                                     child: Row(
                                       mainAxisAlignment: MainAxisAlignment.center,
                                       children: [
-                                        const Text(
-                                          'Don\'t have an account?  ',
-                                          style: TextStyle(
-                                            fontFamily: 'Plus Jakarta Sans',
-                                            color: Color(0xFF101213),
-                                            fontSize: 14,
-                                            fontWeight: FontWeight.w500,
-                                          ),
-                                        ),
+                                        const CustimText(text: 'Don\'t have an account?  ', size: 14, colour: Color(0xFF101213), fontWeight: FontWeight.w500,),
+
                                         InkWell(
                                           onTap: () {
                                             Navigator.push(context, MaterialPageRoute(builder: (context) => SignUppageWidget()));
                                           },
-                                          child: const Text(
-                                            'Sign Up here ',
-                                            style:TextStyle(fontFamily:
-                                            'Plus Jakarta Sans',
-                                              color: Color(0xFF4B39EF),
-                                              fontSize: 14,
-                                              fontWeight: FontWeight.w600,),
-                                          ),
+                                          child:
+                                          const CustimText(text: 'Sign Up here ', size: 14, colour: Color(0xFF4B39EF), fontWeight: FontWeight.w600,),
                                         ),
 
 
