@@ -60,6 +60,7 @@ class _SignUppageWidgetState extends State<SignUppageWidget>
                 decoration: const BoxDecoration(
                   gradient: LinearGradient(
                     colors: [Color(0xFF4B39EF), Color(0xFFEE8B60)],
+                    // colors: [Color(0xFF4B39EF), Color(0xFFF3A02C)],
                     stops: [0, 1],
                     begin: AlignmentDirectional(0.87, -1),
                     end: AlignmentDirectional(-0.87, 1),
@@ -128,18 +129,19 @@ class _SignUppageWidgetState extends State<SignUppageWidget>
                                       fontWeight: FontWeight.w600,
                                     ),
                                   ),
-                                  const Padding(
-                                    padding:  EdgeInsetsDirectional.fromSTEB(
-                                        0, 12, 0, 24),
-                                    child: Text(
-                                      'Let\'s get started by filling out the form below.',
-                                      textAlign: TextAlign.center,
-                                      style:TextStyle( fontFamily: 'Plus Jakarta Sans',
-                                        color: Color(0xFF57636C),
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w500,),
-                                    ),
-                                  ),
+                                  // const Padding(
+                                  //   padding:  EdgeInsetsDirectional.fromSTEB(
+                                  //       0, 12, 0, 24),
+                                  //   child: Text(
+                                  //     'Let\'s get started by filling out the form below.',
+                                  //     textAlign: TextAlign.center,
+                                  //     style:TextStyle( fontFamily: 'Plus Jakarta Sans',
+                                  //       color: Color(0xFF57636C),
+                                  //       fontSize: 16,
+                                  //       fontWeight: FontWeight.w500,),
+                                  //   ),
+                                  // ),
+                                  const SizedBox(height: 12.0,),
                                   Padding(
                                     padding:  const EdgeInsetsDirectional.fromSTEB(
                                         0, 0, 0, 16),

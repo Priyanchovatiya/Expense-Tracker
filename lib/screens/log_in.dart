@@ -56,8 +56,10 @@ class _LoginpageWidgetState extends State<LoginpageWidget>
                 width: 100,
                 height: double.infinity,
                 decoration: const BoxDecoration(
+                  // color: const Color(0xFFE1EBF1),
                   gradient: LinearGradient(
                     colors: [Color(0xFF4B39EF), Color(0xFFEE8B60)],
+                    // [Color(0xFFF3A02C), Color(0xFFE12361)],
                     stops: [0, 1],
                     begin: AlignmentDirectional(0.87, -1),
                     end: AlignmentDirectional(-0.87, 1),
@@ -126,18 +128,19 @@ class _LoginpageWidgetState extends State<LoginpageWidget>
                                       fontWeight: FontWeight.w600,
                                     ),
                                   ),
-                                  const Padding(
-                                    padding:  EdgeInsetsDirectional.fromSTEB(
-                                        0, 12, 0, 24),
-                                    child: Text(
-                                      'Let\'s get started by filling out the form below.',
-                                      textAlign: TextAlign.center,
-                                      style:TextStyle( fontFamily: 'Plus Jakarta Sans',
-                                        color: Color(0xFF57636C),
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w500,),
-                                    ),
-                                  ),
+                                  // const Padding(
+                                  //   padding:  EdgeInsetsDirectional.fromSTEB(
+                                  //       0, 12, 0, 24),
+                                  //   child: Text(
+                                  //     'Let\'s get started by filling out the form below.',
+                                  //     textAlign: TextAlign.center,
+                                  //     style:TextStyle( fontFamily: 'Plus Jakarta Sans',
+                                  //       color: Color(0xFF57636C),
+                                  //       fontSize: 16,
+                                  //       fontWeight: FontWeight.w500,),
+                                  //   ),
+                                  // ),
+                                  SizedBox(height: 12.0,),
                                    Padding(
                                     padding:  const EdgeInsetsDirectional.fromSTEB(
                                         0, 0, 0, 16),
@@ -331,7 +334,7 @@ class _LoginpageWidgetState extends State<LoginpageWidget>
                                       ),
                                     ),
                                   ),
-                                  Padding(
+                                   Padding(
                                       padding: const EdgeInsetsDirectional.fromSTEB(
                                           0, 0, 0, 16),
                                       child: InkWell(
@@ -382,6 +385,7 @@ class _LoginpageWidgetState extends State<LoginpageWidget>
                                             ],
                                           ),
                                         ),
+
                                       )
                                   ),
 
