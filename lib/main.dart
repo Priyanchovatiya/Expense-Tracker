@@ -1,8 +1,5 @@
-
 import 'package:expensetracker/InitialScreens/log_in.dart';
 import 'package:flutter/material.dart';
-
-import 'InitialScreens/home_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -18,12 +15,9 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-
         primarySwatch: Colors.blue,
       ),
-      home:  LoginpageWidget(),
+      home: const LoginpageWidget(),
     );
   }
 }
-
-

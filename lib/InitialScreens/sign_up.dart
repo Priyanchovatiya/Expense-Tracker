@@ -1,15 +1,8 @@
-
-import 'package:flutter/gestures.dart';
+import 'package:expensetracker/customs/custome_field.dart';
 import 'package:flutter/material.dart';
-
-
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-
-
 import '../customs/custom_text.dart';
 import 'log_in.dart';
-
-
 
 class SignUppageWidget extends StatefulWidget {
   const SignUppageWidget({Key? key}) : super(key: key);
@@ -20,27 +13,27 @@ class SignUppageWidget extends StatefulWidget {
 
 class _SignUppageWidgetState extends State<SignUppageWidget>
     with TickerProviderStateMixin {
-
-
   final scaffoldKey = GlobalKey<ScaffoldState>();
   final _unfocusNode = FocusNode();
-
-
 
   @override
   void initState() {
     super.initState();
-
   }
 
   @override
   void dispose() {
     _unfocusNode.dispose();
+    emailController.dispose();
+    passwordController.dispose();
+    confirmPasswordController.dispose();
     super.dispose();
   }
+
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-  final TextEditingController ConfirmPasswordController = TextEditingController();
+  final TextEditingController confirmPasswordController =
+      TextEditingController();
   bool passwordVisible = false;
 
   @override
@@ -74,7 +67,8 @@ class _SignUppageWidgetState extends State<SignUppageWidget>
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Padding(
-                        padding: const EdgeInsetsDirectional.fromSTEB(0, 70, 0, 32),
+                        padding:
+                            const EdgeInsetsDirectional.fromSTEB(0, 70, 0, 32),
                         child: Container(
                           width: 250,
                           height: 70,
@@ -82,11 +76,17 @@ class _SignUppageWidgetState extends State<SignUppageWidget>
                             borderRadius: BorderRadius.circular(16),
                           ),
                           alignment: const AlignmentDirectional(0, 0),
-                          child: const CustimText(text: 'Expense Tracker', size: 31, colour: Colors.white, fontWeight: FontWeight.w500,),
+                          child: const CustimText(
+                            text: 'Expense Tracker',
+                            size: 31,
+                            colour: Colors.white,
+                            fontWeight: FontWeight.w500,
+                          ),
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsetsDirectional.fromSTEB(16, 16, 16, 16),
+                        padding: const EdgeInsetsDirectional.fromSTEB(
+                            16, 16, 16, 16),
                         child: Container(
                           width: double.infinity,
                           constraints: const BoxConstraints(
@@ -112,7 +112,12 @@ class _SignUppageWidgetState extends State<SignUppageWidget>
                                 mainAxisSize: MainAxisSize.max,
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
-                                  const CustimText(text: 'Get Started', size: 36, colour: Color(0xFF101213), fontWeight: FontWeight.w600,),
+                                  const CustimText(
+                                    text: 'Get Started',
+                                    size: 36,
+                                    colour: Color(0xFF101213),
+                                    fontWeight: FontWeight.w600,
+                                  ),
                                   // const Padding(
                                   //   padding:  EdgeInsetsDirectional.fromSTEB(
                                   //       0, 12, 0, 24),
@@ -125,175 +130,42 @@ class _SignUppageWidgetState extends State<SignUppageWidget>
                                   //       fontWeight: FontWeight.w500,),
                                   //   ),
                                   // ),
-                                  const SizedBox(height: 12.0,),
-                                  Padding(
-                                    padding:  const EdgeInsetsDirectional.fromSTEB(
-                                        0, 0, 0, 16),
-                                    child: Container(
-                                      width: double.infinity,
-                                      child: TextFormField(
-                                        controller:
-                                        emailController,
-                                        autofocus: true,
-
-                                        obscureText: false,
-                                        decoration: InputDecoration(
-                                          labelText: 'Email',
-                                          labelStyle:
-                                          const TextStyle(   fontFamily:
-                                          'Plus Jakarta Sans',
-                                            color:  Color(0xFF57636C),
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.w500,),
-                                          enabledBorder: OutlineInputBorder(
-                                            borderSide: const BorderSide(
-                                              color: Color(0xFFF1F4F8),
-                                              width: 2,
-                                            ),
-                                            borderRadius:
-                                            BorderRadius.circular(12),
-                                          ),
-                                          focusedBorder: OutlineInputBorder(
-                                            borderSide: const BorderSide(
-                                              color: Color(0xFF4B39EF),
-                                              width: 2,
-                                            ),
-                                            borderRadius:
-                                            BorderRadius.circular(12),
-                                          ),
-                                          errorBorder: OutlineInputBorder(
-                                            borderSide: const BorderSide(
-                                              color: Color(0xFFE0E3E7),
-                                              width: 2,
-                                            ),
-                                            borderRadius:
-                                            BorderRadius.circular(12),
-                                          ),
-                                          focusedErrorBorder:
-                                          OutlineInputBorder(
-                                            borderSide: const BorderSide(
-                                              color: Color(0xFFE0E3E7),
-                                              width: 2,
-                                            ),
-                                            borderRadius:
-                                            BorderRadius.circular(12),
-                                          ),
-                                          filled: true,
-                                          fillColor: Color(0xFFF1F4F8),
-                                        ),
-                                        style: const TextStyle(
-                                          fontFamily: 'Plus Jakarta Sans',
-                                          color:  Color(0xFF101213),
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w500,
-                                        ),
-                                        keyboardType:
-                                        TextInputType.emailAddress,
-                                        // validator: emailController
-                                        //     .asValidator(context),
-                                      ),
-                                    ),
+                                  const SizedBox(
+                                    height: 12.0,
+                                  ),
+                                  CustomFormField(
+                                    textEditingController: emailController,
+                                    obsecure: false,
+                                    label: 'Email',
+                                    hint: 'Enter Email',
+                                    validator: (value) {},
+                                    onTap: () {},
+                                  ),
+                                  CustomFormField(
+                                    textEditingController: passwordController,
+                                    obsecure: false,
+                                    label: 'Password',
+                                    hint: 'Enter Password',
+                                    validator: (value) {},
+                                    onTap: () {},
                                   ),
                                   Padding(
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
-                                        0, 0, 0, 16),
+                                    padding:
+                                        const EdgeInsetsDirectional.fromSTEB(
+                                            0, 0, 0, 16),
                                     child: Container(
                                       width: double.infinity,
                                       child: TextFormField(
-                                        controller: passwordController,
-                                        autofocus: true,
-                                        autofillHints: [AutofillHints.password],
-                                        obscureText: passwordVisible ? false : true,
-                                        decoration: InputDecoration(
-                                          labelText: 'Password',
-                                          labelStyle:
-                                          const TextStyle(
-                                            fontFamily:
-                                            'Plus Jakarta Sans',
-                                            color: const Color(0xFF57636C),
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.w500,
-                                          ),
-                                          enabledBorder: OutlineInputBorder(
-                                            borderSide: const BorderSide(
-                                              color: Color(0xFFF1F4F8),
-                                              width: 2,
-                                            ),
-                                            borderRadius:
-                                            BorderRadius.circular(12),
-                                          ),
-                                          focusedBorder: OutlineInputBorder(
-                                            borderSide: const BorderSide(
-                                              color: Color(0xFF4B39EF),
-                                              width: 2,
-                                            ),
-                                            borderRadius:
-                                            BorderRadius.circular(12),
-                                          ),
-                                          errorBorder: OutlineInputBorder(
-                                            borderSide: const BorderSide(
-                                              color:  Color(0xFFFF5963),
-                                              width: 2,
-                                            ),
-                                            borderRadius:
-                                            BorderRadius.circular(12),
-                                          ),
-                                          focusedErrorBorder:
-                                          OutlineInputBorder(
-                                            borderSide: const BorderSide(
-                                              color: Color(0xFFFF5963),
-                                              width: 2,
-                                            ),
-                                            borderRadius:
-                                            BorderRadius.circular(12),
-                                          ),
-                                          filled: true,
-                                          fillColor: Color(0xFFF1F4F8),
-                                          suffixIcon: InkWell(
-                                            onTap: () => setState(
-                                                  () => passwordVisible =
-                                              !passwordVisible,
-                                            ),
-                                            focusNode:
-                                            FocusNode(skipTraversal: true),
-                                            child: Icon(
-                                              passwordVisible
-                                                  ? Icons.visibility_outlined
-                                                  : Icons
-                                                  .visibility_off_outlined,
-                                              color: Color(0xFF57636C),
-                                              size: 24,
-                                            ),
-                                          ),
-                                        ),
-                                        style: const TextStyle(
-                                          fontFamily: 'Plus Jakarta Sans',
-                                          color: Color(0xFF101213),
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w500,
-                                        ),
-                                        // validator: _model
-                                        //     .passwordControllerValidator
-                                        //     .asValidator(context),
-                                      ),
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
-                                        0, 0, 0, 16),
-                                    child: Container(
-                                      width: double.infinity,
-                                      child: TextFormField(
-                                        controller: ConfirmPasswordController,
+                                        controller: confirmPasswordController,
                                         autofocus: true,
 
-                                        obscureText: passwordVisible ? false : true,
+                                        obscureText:
+                                            passwordVisible ? false : true,
                                         decoration: InputDecoration(
+                                          hintText: "Enter Confirm Password",
                                           labelText: 'Confirm Password',
-                                          labelStyle:
-                                          const TextStyle(
-                                            fontFamily:
-                                            'Plus Jakarta Sans',
+                                          labelStyle: const TextStyle(
+                                            fontFamily: 'Plus Jakarta Sans',
                                             color: const Color(0xFF57636C),
                                             fontSize: 16,
                                             fontWeight: FontWeight.w500,
@@ -304,7 +176,7 @@ class _SignUppageWidgetState extends State<SignUppageWidget>
                                               width: 2,
                                             ),
                                             borderRadius:
-                                            BorderRadius.circular(12),
+                                                BorderRadius.circular(12),
                                           ),
                                           focusedBorder: OutlineInputBorder(
                                             borderSide: const BorderSide(
@@ -312,39 +184,39 @@ class _SignUppageWidgetState extends State<SignUppageWidget>
                                               width: 2,
                                             ),
                                             borderRadius:
-                                            BorderRadius.circular(12),
+                                                BorderRadius.circular(12),
                                           ),
                                           errorBorder: OutlineInputBorder(
-                                            borderSide: const BorderSide(
-                                              color:  Color(0xFFFF5963),
-                                              width: 2,
-                                            ),
-                                            borderRadius:
-                                            BorderRadius.circular(12),
-                                          ),
-                                          focusedErrorBorder:
-                                          OutlineInputBorder(
                                             borderSide: const BorderSide(
                                               color: Color(0xFFFF5963),
                                               width: 2,
                                             ),
                                             borderRadius:
-                                            BorderRadius.circular(12),
+                                                BorderRadius.circular(12),
+                                          ),
+                                          focusedErrorBorder:
+                                              OutlineInputBorder(
+                                            borderSide: const BorderSide(
+                                              color: Color(0xFFFF5963),
+                                              width: 2,
+                                            ),
+                                            borderRadius:
+                                                BorderRadius.circular(12),
                                           ),
                                           filled: true,
                                           fillColor: Color(0xFFF1F4F8),
                                           suffixIcon: InkWell(
                                             onTap: () => setState(
-                                                  () => passwordVisible =
-                                              !passwordVisible,
+                                              () => passwordVisible =
+                                                  !passwordVisible,
                                             ),
                                             focusNode:
-                                            FocusNode(skipTraversal: true),
+                                                FocusNode(skipTraversal: true),
                                             child: Icon(
                                               passwordVisible
                                                   ? Icons.visibility_outlined
                                                   : Icons
-                                                  .visibility_off_outlined,
+                                                      .visibility_off_outlined,
                                               color: Color(0xFF57636C),
                                               size: 24,
                                             ),
@@ -363,41 +235,50 @@ class _SignUppageWidgetState extends State<SignUppageWidget>
                                     ),
                                   ),
                                   Padding(
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
-                                          0, 0, 0, 16),
-                                      child: InkWell(
-                                        child: Container(
-                                          width: double.infinity,
-                                          height: 44,
-
-
-                                          decoration:  BoxDecoration(
-                                            color: const Color(0xFF4B39EF),
-                                            borderRadius: BorderRadius.circular(12),
-
-                                          ),
-                                          child:  Center(child: const CustimText(text: 'Create Account', size: 16, colour: Colors.white, fontWeight: FontWeight.w500,)),
-                                          ),
+                                    padding:
+                                        const EdgeInsetsDirectional.fromSTEB(
+                                            0, 0, 0, 16),
+                                    child: InkWell(
+                                      child: Container(
+                                        width: double.infinity,
+                                        height: 44,
+                                        decoration: BoxDecoration(
+                                          color: const Color(0xFF4B39EF),
+                                          borderRadius:
+                                              BorderRadius.circular(12),
                                         ),
-
+                                        child: Center(
+                                            child: const CustimText(
+                                          text: 'Create Account',
+                                          size: 16,
+                                          colour: Colors.white,
+                                          fontWeight: FontWeight.w500,
+                                        )),
+                                      ),
+                                    ),
                                   ),
                                   const Padding(
                                     padding: EdgeInsetsDirectional.fromSTEB(
                                         16, 0, 16, 24),
-                                    child: CustimText(text: 'Or sign up with', size: 16, colour:Color(0xFF57636C), fontWeight: FontWeight.w500,),
+                                    child: CustimText(
+                                      text: 'Or sign up with',
+                                      size: 16,
+                                      colour: Color(0xFF57636C),
+                                      fontWeight: FontWeight.w500,
+                                    ),
                                   ),
                                   Padding(
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
-                                          0, 0, 0, 16),
+                                      padding:
+                                          const EdgeInsetsDirectional.fromSTEB(
+                                              0, 0, 0, 16),
                                       child: InkWell(
                                         child: Container(
                                           width: double.infinity,
                                           height: 44,
-
-
-                                          decoration:  BoxDecoration(
-                                              color:  Colors.white,
-                                              borderRadius: BorderRadius.circular(12),
+                                          decoration: BoxDecoration(
+                                              color: Colors.white,
+                                              borderRadius:
+                                                  BorderRadius.circular(12),
                                               border: const Border(
                                                 top: BorderSide(
                                                   color: Color(0xFFE0E3E7),
@@ -411,47 +292,63 @@ class _SignUppageWidgetState extends State<SignUppageWidget>
                                                   color: Color(0xFFE0E3E7),
                                                   width: 2,
                                                 ),
-                                                right : BorderSide(
+                                                right: BorderSide(
                                                   color: Color(0xFFE0E3E7),
                                                   width: 2,
                                                 ),
-                                              )
-
-
-                                          ),
+                                              )),
                                           child: Row(
-
-                                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceEvenly,
                                             children: const [
-                                              Icon(FontAwesomeIcons.google ,size: 20,),
+                                              Icon(
+                                                FontAwesomeIcons.google,
+                                                size: 20,
+                                              ),
                                               Center(
-                                                child:   CustimText(text: 'Continue With Google', size: 16, colour: Colors.black, fontWeight: FontWeight.w500,),
+                                                child: CustimText(
+                                                  text: 'Continue With Google',
+                                                  size: 16,
+                                                  colour: Colors.black,
+                                                  fontWeight: FontWeight.w500,
+                                                ),
                                               ),
                                             ],
                                           ),
                                         ),
-                                      )
-                                  ),
+                                      )),
 
                                   Padding(
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
-                                        0, 12, 0, 12),
+                                    padding:
+                                        const EdgeInsetsDirectional.fromSTEB(
+                                            0, 12, 0, 12),
                                     child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
                                       children: [
-                                        const    CustimText(text: 'Already have an account?  ', size: 14, colour: Color(0xFF101213), fontWeight: FontWeight.w500,),
+                                        const CustimText(
+                                          text: 'Already have an account?  ',
+                                          size: 14,
+                                          colour: Color(0xFF101213),
+                                          fontWeight: FontWeight.w500,
+                                        ),
                                         InkWell(
                                           onTap: () {
-                                            Navigator.push(context, MaterialPageRoute(builder: (context) => LoginpageWidget()));
+                                            Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        LoginpageWidget()));
                                           },
-                                          child: const CustimText(text: 'Sign In here ', size: 14, colour: Color(0xFF4B39EF), fontWeight: FontWeight.w600,),
+                                          child: const CustimText(
+                                            text: 'Sign In here ',
+                                            size: 14,
+                                            colour: Color(0xFF4B39EF),
+                                            fontWeight: FontWeight.w600,
+                                          ),
                                         ),
-
-
-
                                       ],
                                     ),
-
                                   ),
                                 ],
                               ),
