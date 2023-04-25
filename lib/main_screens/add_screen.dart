@@ -1,4 +1,5 @@
 import 'package:animated_segmented_tab_control/animated_segmented_tab_control.dart';
+import 'package:expensetracker/Forms/income.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_advanced_segment/flutter_advanced_segment.dart';
 
@@ -49,15 +50,12 @@ class _AddScreenState extends State<AddScreen> {
                 ),
               ),
               // Sample pages
-              Padding(
+              Container(
                 padding: const EdgeInsets.only(top: 70),
                 child: TabBarView(
                   physics: const BouncingScrollPhysics(),
                   children: [
-                    SampleWidget(
-                      label: 'FIRST PAGE',
-                      color: Colors.red.shade200,
-                    ),
+                    IncomeForm(),
                     SampleWidget(
                       label: 'SECOND PAGE',
                       color: Colors.blue.shade100,

@@ -120,7 +120,7 @@ class _LoginpageWidgetState extends State<LoginpageWidget>
                               borderRadius: BorderRadius.circular(16),
                             ),
                             alignment: const AlignmentDirectional(0, 0),
-                            child: const CustimText(
+                            child: const CustomText(
                               text: 'Expense Tracker',
                               size: 31,
                               colour: Colors.white,
@@ -156,7 +156,7 @@ class _LoginpageWidgetState extends State<LoginpageWidget>
                                   mainAxisSize: MainAxisSize.max,
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
-                                    const CustimText(
+                                    const CustomText(
                                       text: 'Welcome Back',
                                       size: 36,
                                       colour: Color(0xFF101213),
@@ -286,7 +286,7 @@ class _LoginpageWidgetState extends State<LoginpageWidget>
                                                       BorderRadius.circular(12),
                                                 ),
                                                 child: const Center(
-                                                  child: CustimText(
+                                                  child: CustomText(
                                                     text: 'Log in',
                                                     size: 16,
                                                     colour: Colors.white,
@@ -298,7 +298,7 @@ class _LoginpageWidgetState extends State<LoginpageWidget>
                                     const Padding(
                                       padding: EdgeInsetsDirectional.fromSTEB(
                                           16, 0, 16, 24),
-                                      child: CustimText(
+                                      child: CustomText(
                                         text: 'Or sign up with',
                                         size: 16,
                                         colour: Color(0xFF57636C),
@@ -343,7 +343,7 @@ class _LoginpageWidgetState extends State<LoginpageWidget>
                                                   size: 20,
                                                 ),
                                                 Center(
-                                                  child: CustimText(
+                                                  child: CustomText(
                                                     text:
                                                         'Continue With Google',
                                                     size: 16,
@@ -365,7 +365,7 @@ class _LoginpageWidgetState extends State<LoginpageWidget>
                                         mainAxisAlignment:
                                             MainAxisAlignment.center,
                                         children: [
-                                          const CustimText(
+                                          const CustomText(
                                             text: 'Don\'t have an account?  ',
                                             size: 14,
                                             colour: Color(0xFF101213),
@@ -379,7 +379,7 @@ class _LoginpageWidgetState extends State<LoginpageWidget>
                                                       builder: (context) =>
                                                           const SignUppageWidget()));
                                             },
-                                            child: const CustimText(
+                                            child: const CustomText(
                                               text: 'Sign Up here ',
                                               size: 14,
                                               colour: Color(0xFF4B39EF),

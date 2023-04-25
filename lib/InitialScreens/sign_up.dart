@@ -112,7 +112,7 @@ class _SignUppageWidgetState extends State<SignUppageWidget>
                                 borderRadius: BorderRadius.circular(16),
                               ),
                               alignment: const AlignmentDirectional(0, 0),
-                              child: const CustimText(
+                              child: const CustomText(
                                 text: 'Expense Tracker',
                                 size: 31,
                                 colour: Colors.white,
@@ -149,7 +149,7 @@ class _SignUppageWidgetState extends State<SignUppageWidget>
                                     crossAxisAlignment:
                                         CrossAxisAlignment.center,
                                     children: [
-                                      const CustimText(
+                                      const CustomText(
                                         text: 'Get Started',
                                         size: 36,
                                         colour: Color(0xFF101213),
@@ -298,7 +298,7 @@ class _SignUppageWidgetState extends State<SignUppageWidget>
                                                             12),
                                                   ),
                                                   child: Center(
-                                                      child: const CustimText(
+                                                      child: const CustomText(
                                                     text: 'Create Account',
                                                     size: 16,
                                                     colour: Colors.white,
@@ -310,7 +310,7 @@ class _SignUppageWidgetState extends State<SignUppageWidget>
                                       const Padding(
                                         padding: EdgeInsetsDirectional.fromSTEB(
                                             16, 0, 16, 24),
-                                        child: CustimText(
+                                        child: CustomText(
                                           text: 'Or sign up with',
                                           size: 16,
                                           colour: Color(0xFF57636C),
@@ -356,7 +356,7 @@ class _SignUppageWidgetState extends State<SignUppageWidget>
                                                     size: 20,
                                                   ),
                                                   Center(
-                                                    child: CustimText(
+                                                    child: CustomText(
                                                       text:
                                                           'Continue With Google',
                                                       size: 16,
@@ -377,7 +377,7 @@ class _SignUppageWidgetState extends State<SignUppageWidget>
                                           mainAxisAlignment:
                                               MainAxisAlignment.center,
                                           children: [
-                                            const CustimText(
+                                            const CustomText(
                                               text:
                                                   'Already have an account?  ',
                                               size: 14,
@@ -392,7 +392,7 @@ class _SignUppageWidgetState extends State<SignUppageWidget>
                                                         builder: (context) =>
                                                             LoginpageWidget()));
                                               },
-                                              child: const CustimText(
+                                              child: const CustomText(
                                                 text: 'Sign In here ',
                                                 size: 14,
                                                 colour: Color(0xFF4B39EF),
