@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.expensetracker">
+    package="com.origo.expense.tracker">
    <application
         android:label="expensetracker"
         android:name="${applicationName}"

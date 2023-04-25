@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>1020558899535-ifpjjbv6ogvjt36g721ms8hc9qggvh1q.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.1020558899535-ifpjjbv6ogvjt36g721ms8hc9qggvh1q</string>
+	<key>API_KEY</key>
+	<string>AIzaSyDaPiY41YkSf28IeZD-ijtEwW4pu8BlfWE</string>
+	<key>GCM_SENDER_ID</key>
+	<string>1020558899535</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.expensetracker</string>
+	<key>PROJECT_ID</key>
+	<string>expense-tracker-73da8</string>
+	<key>STORAGE_BUCKET</key>
+	<string>expense-tracker-73da8.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:1020558899535:ios:734d20a685af8e9f082d3a</string>
+</dict>
+</plist>

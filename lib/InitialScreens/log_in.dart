@@ -1,9 +1,13 @@
 import 'package:expensetracker/InitialScreens/home_screen.dart';
+import 'package:expensetracker/controller/sign_in_control.dart';
 import 'package:expensetracker/customs/custome_field.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'package:expensetracker/InitialScreens/sign_up.dart';
+import 'package:provider/provider.dart';
 
 import '../customs/custom_text.dart';
 
@@ -18,6 +22,42 @@ class _LoginpageWidgetState extends State<LoginpageWidget>
     with TickerProviderStateMixin {
   final scaffoldKey = GlobalKey<ScaffoldState>();
   final _unfocusNode = FocusNode();
+  final _formkey = GlobalKey<FormState>();
+  bool loading = false;
+
+  void moveToHome(BuildContext context) async {
+    if (_formkey.currentState!.validate()) {
+      try {
+        setState(() {
+          loading = true;
+        });
+        final credential = await FirebaseAuth.instance
+            .signInWithEmailAndPassword(
+                email: emailController.text, password: passwordController.text)
+            .then((value) {
+          setState(() {
+            loading = false;
+          });
+        });
+        print(emailController.text);
+
+        Navigator.of(context)
+            .push(MaterialPageRoute(builder: (context) => const HomeScreen()));
+      } on FirebaseAuthException catch (e) {
+        if (e.code == 'user-not-found') {
+          setState(() {
+            loading = false;
+            Fluttertoast.showToast(msg: "User Not Found");
+          });
+        } else if (e.code == 'wrong-password') {
+          setState(() {
+            loading = false;
+            Fluttertoast.showToast(msg: "Password is incorrect!! Try Again");
+          });
+        }
+      }
+    }
+  }
 
   @override
   void initState() {
@@ -35,7 +75,6 @@ class _LoginpageWidgetState extends State<LoginpageWidget>
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
-  final _formkey = GlobalKey<FormState>();
   bool passwordVisible = false;
 
   @override
@@ -221,34 +260,41 @@ class _LoginpageWidgetState extends State<LoginpageWidget>
                                       ),
                                     ),
 
-                                    Padding(
-                                        padding: const EdgeInsetsDirectional
-                                            .fromSTEB(0, 0, 0, 16),
-                                        child: InkWell(
-                                          onTap: () {
-                                            Navigator.of(context).push(
-                                                MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        HomeScreen()));
-                                          },
-                                          child: Container(
-                                            width: double.infinity,
-                                            height: 44,
-                                            decoration: BoxDecoration(
-                                              color: const Color(0xFF4B39EF),
-                                              borderRadius:
-                                                  BorderRadius.circular(12),
-                                            ),
-                                            child: const Center(
-                                              child: CustimText(
-                                                text: 'Log in',
-                                                size: 16,
-                                                colour: Colors.white,
-                                                fontWeight: FontWeight.w500,
+                                    loading
+                                        ? const Center(
+                                            child: CircularProgressIndicator(),
+                                          )
+                                        : Padding(
+                                            padding: const EdgeInsetsDirectional
+                                                .fromSTEB(0, 0, 0, 16),
+                                            child: InkWell(
+                                              onTap: () {
+                                                moveToHome(context);
+                                                // final provider = Provider.of<
+                                                //         GoogleSingInProivder>(
+                                                //     context,
+                                                //     listen: false);
+                                                // provider.GooogleLogIn();
+                                              },
+                                              child: Container(
+                                                width: double.infinity,
+                                                height: 44,
+                                                decoration: BoxDecoration(
+                                                  color:
+                                                      const Color(0xFF4B39EF),
+                                                  borderRadius:
+                                                      BorderRadius.circular(12),
+                                                ),
+                                                child: const Center(
+                                                  child: CustimText(
+                                                    text: 'Log in',
+                                                    size: 16,
+                                                    colour: Colors.white,
+                                                    fontWeight: FontWeight.w500,
+                                                  ),
+                                                ),
                                               ),
-                                            ),
-                                          ),
-                                        )),
+                                            )),
                                     const Padding(
                                       padding: EdgeInsetsDirectional.fromSTEB(
                                           16, 0, 16, 24),
