@@ -2,6 +2,7 @@ import 'package:animated_segmented_tab_control/animated_segmented_tab_control.da
 import 'package:expensetracker/Forms/expense.dart';
 import 'package:expensetracker/Forms/income.dart';
 import 'package:expensetracker/constant.dart';
+import 'package:expensetracker/customs/custom_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_advanced_segment/flutter_advanced_segment.dart';
 
@@ -56,10 +57,13 @@ class _AddScreenState extends State<AddScreen> {
                   children: [
                     IncomeForm(),
                     ExpenseForm(),
-                    SampleWidget(
-                      label: 'THIRD PAGE',
-                      color: Colors.orange.shade200,
-                    ),
+                    Center(
+                      child: CustomText(
+                          fontWeight: FontWeight.w500,
+                          text: "Coming Soon.....",
+                          size: 18,
+                          colour: Colors.black),
+                    )
                   ],
                 ),
               ),

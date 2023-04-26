@@ -73,19 +73,17 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
               color: Colors.black.withOpacity(0.3),
               borderRadius: BorderRadius.circular(35.0),
             ),
-
           ),
           Row(
             children: [
               Container(
                 margin: EdgeInsets.all(20.0),
                 height: 100,
-               width: 150,
+                width: 150,
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(25.0),
                 ),
-
               ),
               Container(
                 margin: EdgeInsets.all(20.0),
@@ -95,12 +93,10 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(25.0),
                 ),
-
               )
             ],
           )
         ],
-
       ),
     );
   }
