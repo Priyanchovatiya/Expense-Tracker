@@ -9,14 +9,14 @@ import 'package:expensetracker/constant.dart';
 import 'package:expensetracker/customs/custom_field_income.dart';
 import 'package:expensetracker/customs/custom_text.dart';
 
-class IncomeForm extends StatefulWidget {
-  const IncomeForm({super.key});
+class ExpenseForm extends StatefulWidget {
+  const ExpenseForm({super.key});
 
   @override
-  State<IncomeForm> createState() => _IncomeFormState();
+  State<ExpenseForm> createState() => _ExpenseFormState();
 }
 
-class _IncomeFormState extends State<IncomeForm> {
+class _ExpenseFormState extends State<ExpenseForm> {
   final TextEditingController title = TextEditingController();
   final TextEditingController amount = TextEditingController();
   final TextEditingController category = TextEditingController();
@@ -26,12 +26,12 @@ class _IncomeFormState extends State<IncomeForm> {
       TextEditingController(text: TimeOfDay.now().toString().substring(10, 15));
   final TextEditingController mode = TextEditingController();
 
-  String dropCategory = incomeCategory[0];
+  String dropCategory = expenseCategory[0];
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    category.text = incomeCategory[0];
+    category.text = expenseCategory[0];
   }
 
   @override
@@ -96,7 +96,7 @@ class _IncomeFormState extends State<IncomeForm> {
                   ),
 
                   // Array list of items
-                  items: incomeCategory.map((String items) {
+                  items: expenseCategory.map((String items) {
                     return DropdownMenuItem(
                       value: items,
                       child: Text(items),
@@ -182,7 +182,7 @@ class _IncomeFormState extends State<IncomeForm> {
                     mode: mode.text,
                     date: dateController.text,
                     time: timecontroller.text);
-                FirebaseTranscation().addIncome(incomeExpenseModel);
+                FirebaseTranscation().addExpense(incomeExpenseModel);
               },
               child: Container(
                 height: 50,
@@ -191,7 +191,7 @@ class _IncomeFormState extends State<IncomeForm> {
                     borderRadius: BorderRadius.all(Radius.circular(20))),
                 child: const Center(
                   child: Text(
-                    "Add Income",
+                    "Add Expense",
                     style: TextStyle(
                         fontSize: 18,
                         color: Colors.white,

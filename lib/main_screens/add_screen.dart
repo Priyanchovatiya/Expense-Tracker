@@ -1,4 +1,5 @@
 import 'package:animated_segmented_tab_control/animated_segmented_tab_control.dart';
+import 'package:expensetracker/Forms/expense.dart';
 import 'package:expensetracker/Forms/income.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_advanced_segment/flutter_advanced_segment.dart';
@@ -52,10 +53,7 @@ class _AddScreenState extends State<AddScreen> {
                   physics: const BouncingScrollPhysics(),
                   children: [
                     IncomeForm(),
-                    SampleWidget(
-                      label: 'SECOND PAGE',
-                      color: Colors.blue.shade100,
-                    ),
+                    ExpenseForm(),
                     SampleWidget(
                       label: 'THIRD PAGE',
                       color: Colors.orange.shade200,
