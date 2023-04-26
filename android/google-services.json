@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "1020558899535-qon4t8t734m26i0gavbc5g6m18o1afha.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.expensetracker",
+            "certificate_hash": "ed5f00050385ed2cca2e5f2e35b4757e7904c7fc"
+          }
+        },
+        {
           "client_id": "1020558899535-r4nfhec2748gltagd8nglu5s8rli5r80.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
@@ -57,6 +65,22 @@
         }
       },
       "oauth_client": [
+        {
+          "client_id": "1020558899535-6patdog9cvaco4sv8ur21610t5eld03p.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.origo.expense.tracker",
+            "certificate_hash": "f85ff19634cbbb57dfd4995fbb3646695efd4a46"
+          }
+        },
+        {
+          "client_id": "1020558899535-89g95fch9l0b0irhr6976ag0h341k0m7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.origo.expense.tracker",
+            "certificate_hash": "ed5f00050385ed2cca2e5f2e35b4757e7904c7fc"
+          }
+        },
         {
           "client_id": "1020558899535-vne8i5t6br2lcbf8e4ctuciiojm3mni6.apps.googleusercontent.com",
           "client_type": 3

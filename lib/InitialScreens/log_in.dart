@@ -314,7 +314,13 @@ class _LoginpageWidgetState extends State<LoginpageWidget>
                                         padding: const EdgeInsetsDirectional
                                             .fromSTEB(0, 0, 0, 16),
                                         child: InkWell(
-                                          onTap: () {
+
+                                          onTap: (){
+                                            final provider = Provider.of<
+                                                        GoogleSingInProivder>(
+                                                    context,
+                                                    listen: false);
+                                                provider.GooogleLogIn();
 
                                           },
                                           child: Container(

@@ -1,5 +1,7 @@
 import 'package:animated_segmented_tab_control/animated_segmented_tab_control.dart';
+import 'package:expensetracker/Forms/expense.dart';
 import 'package:expensetracker/Forms/income.dart';
+import 'package:expensetracker/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_advanced_segment/flutter_advanced_segment.dart';
 
@@ -15,10 +17,7 @@ class _AddScreenState extends State<AddScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(
-          title: Text("Expense Tracker"),
-          centerTitle: true,
-        ),
+        backgroundColor: purple,
         body: DefaultTabController(
           length: 3,
           child: Stack(
@@ -26,18 +25,18 @@ class _AddScreenState extends State<AddScreen> {
               Container(
                 padding: const EdgeInsets.all(16.0),
                 child: SegmentedTabControl(
-                  radius: const Radius.circular(20),
-                  backgroundColor: Colors.grey.shade300,
-                  indicatorColor: Color(0xFF262629).withOpacity(0.7),
+                  radius: const Radius.circular(12),
+                  backgroundColor: Colors.white,
+                  indicatorColor: navBackColor,
                   tabTextColor: Colors.black45,
                   selectedTabTextColor: Colors.white,
                   squeezeIntensity: 2,
-                  height: 45,
+                  height: 35,
                   tabPadding: const EdgeInsets.symmetric(horizontal: 8),
                   textStyle: Theme.of(context).textTheme.bodyLarge,
                   // Options for selection
                   // All specified values will override the [SegmentedTabControl] setting
-                  tabs: [
+                  tabs: const [
                     SegmentTab(
                       label: 'INCOME',
                       // For example, this overrides [indicatorColor] from [SegmentedTabControl]
@@ -56,10 +55,7 @@ class _AddScreenState extends State<AddScreen> {
                   physics: const BouncingScrollPhysics(),
                   children: [
                     IncomeForm(),
-                    SampleWidget(
-                      label: 'SECOND PAGE',
-                      color: Colors.blue.shade100,
-                    ),
+                    ExpenseForm(),
                     SampleWidget(
                       label: 'THIRD PAGE',
                       color: Colors.orange.shade200,

@@ -23,7 +23,7 @@ class CustomTransactionField extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
-      margin: EdgeInsets.only(bottom: 10),
+      margin: EdgeInsets.only(bottom: 5),
       width: double.infinity,
       child: TextFormField(
           controller: textEditingController,
@@ -66,13 +66,13 @@ class CustomTransactionField extends StatelessWidget {
             ),
             focusedErrorBorder: OutlineInputBorder(
               borderSide: const BorderSide(
-                color: Color(0xFFE0E3E7),
+                color: Colors.white,
                 width: 2,
               ),
               borderRadius: BorderRadius.circular(12),
             ),
             filled: true,
-            fillColor: const Color(0xFFF1F4F8),
+            fillColor: Colors.white,
           ),
           style: const TextStyle(
             fontFamily: 'Plus Jakarta Sans',
