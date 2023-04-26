@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:expensetracker/constant.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -57,9 +58,50 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-        child: Column(
-      children: [],
-    ));
+    return Container(
+      color: Color(0xFFCDF2E5).withOpacity(0.5),
+      child: Column(
+        children: [
+          SizedBox(
+            height: 100,
+          ),
+          Container(
+            margin: EdgeInsets.all(20.0),
+            height: 150,
+            width: double.infinity,
+            decoration: BoxDecoration(
+              color: Colors.black.withOpacity(0.3),
+              borderRadius: BorderRadius.circular(35.0),
+            ),
+
+          ),
+          Row(
+            children: [
+              Container(
+                margin: EdgeInsets.all(20.0),
+                height: 100,
+               width: 150,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(25.0),
+                ),
+
+              ),
+              Container(
+                margin: EdgeInsets.all(20.0),
+                height: 100,
+                width: 150,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(25.0),
+                ),
+
+              )
+            ],
+          )
+        ],
+
+      ),
+    );
   }
 }
