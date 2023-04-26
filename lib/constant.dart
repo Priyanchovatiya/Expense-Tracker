@@ -1,3 +1,9 @@
+
+
+
+
+import 'package:flutter/material.dart';
+
 List<String> incomeCategory = ["Salary", "Sold Items", "Coupons", "Other"];
 
 List<String> expenseCategory = [
@@ -16,3 +22,10 @@ List<String> expenseCategory = [
   "Gift And Donation",
   "Other"
 ];
+
+
+
+final Color purple = Color(0xFFE3E0F1);
+final Color skyblue = Color(0xFFE1EBF1);
+final Color orange = Color(0xFFF1E6E1);
+final Color? greyBGColor = Colors.grey[300];

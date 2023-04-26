@@ -7,6 +7,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'package:expensetracker/InitialScreens/sign_up.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:provider/provider.dart';
 
 import '../customs/custom_text.dart';
@@ -58,6 +59,10 @@ class _LoginpageWidgetState extends State<LoginpageWidget>
       }
     }
   }
+
+
+
+
 
   @override
   void initState() {
@@ -309,6 +314,9 @@ class _LoginpageWidgetState extends State<LoginpageWidget>
                                         padding: const EdgeInsetsDirectional
                                             .fromSTEB(0, 0, 0, 16),
                                         child: InkWell(
+                                          onTap: () {
+
+                                          },
                                           child: Container(
                                             width: double.infinity,
                                             height: 44,
