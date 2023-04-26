@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 List<String> incomeCategory = ["Salary", "Sold Items", "Coupons", "Other"];
 
 List<String> expenseCategory = [
@@ -16,3 +18,5 @@ List<String> expenseCategory = [
   "Gift And Donation",
   "Other"
 ];
+
+const navBackColor = Color(0xFF262629);

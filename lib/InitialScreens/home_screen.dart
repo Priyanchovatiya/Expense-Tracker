@@ -16,11 +16,11 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int _currentIndex = 1;
-  List pages =const [
-      UserHomeScreen(),
-      AnalysisScreen(),
-      AddScreen(),
-      ProfileScreen()
+  List pages = const [
+    UserHomeScreen(),
+    AnalysisScreen(),
+    AddScreen(),
+    ProfileScreen()
   ];
   @override
   Widget build(BuildContext context) {
@@ -31,32 +31,30 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Container(
           width: double.infinity,
           padding: const EdgeInsets.all(12.0),
-          margin: const  EdgeInsets.symmetric(horizontal: 5),
-
+          margin: const EdgeInsets.symmetric(horizontal: 5),
           child: CustomNavigationBar(
             isFloating: true,
             borderRadius: const Radius.circular(24.0),
             selectedColor: Colors.white,
             unSelectedColor: Colors.white.withOpacity(0.5),
-            backgroundColor:   const Color(0xFF262629),
+            backgroundColor: const Color(0xFF262629),
             strokeColor: Colors.transparent,
             scaleFactor: 0.1,
             iconSize: 25,
-
             currentIndex: _currentIndex,
-
             items: [
-              CustomNavigationBarItem(icon: Icon(CupertinoIcons.home )),
-              CustomNavigationBarItem(icon: Icon(CupertinoIcons.chart_bar_alt_fill)),
+              CustomNavigationBarItem(icon: Icon(CupertinoIcons.home)),
+              CustomNavigationBarItem(
+                  icon: Icon(CupertinoIcons.chart_bar_alt_fill)),
               CustomNavigationBarItem(icon: Icon(CupertinoIcons.add_circled)),
-              CustomNavigationBarItem(icon: Icon(CupertinoIcons.profile_circled)),
+              CustomNavigationBarItem(
+                  icon: Icon(CupertinoIcons.profile_circled)),
             ],
             onTap: (index) {
               setState(() {
                 _currentIndex = index;
               });
             },
-
           ),
         ),
       ),

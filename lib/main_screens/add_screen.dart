@@ -15,10 +15,6 @@ class _AddScreenState extends State<AddScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(
-          title: Text("Expense Tracker"),
-          centerTitle: true,
-        ),
         body: DefaultTabController(
           length: 3,
           child: Stack(

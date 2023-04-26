@@ -38,7 +38,7 @@ class _SignUppageWidgetState extends State<SignUppageWidget>
         print(emailController.text);
 
         Navigator.of(context)
-            .push(MaterialPageRoute(builder: (context) => const HomeScreen()));
+            .push(MaterialPageRoute(builder: (context) =>  HomeScreen()));
       } on FirebaseAuthException catch (e) {
          setState(() {
           loading = false;

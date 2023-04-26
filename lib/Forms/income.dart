@@ -1,11 +1,13 @@
+import 'package:expensetracker/Models/income.dart';
+import 'package:expensetracker/controller/add_income.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/src/widgets/framework.dart';
+import 'package:intl/intl.dart';
+
 import 'package:expensetracker/constant.dart';
 import 'package:expensetracker/customs/custom_field_income.dart';
 import 'package:expensetracker/customs/custom_text.dart';
-import 'package:expensetracker/customs/custome_field.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
-import 'package:intl/intl.dart';
 
 class IncomeForm extends StatefulWidget {
   const IncomeForm({super.key});
@@ -24,12 +26,19 @@ class _IncomeFormState extends State<IncomeForm> {
       TextEditingController(text: TimeOfDay.now().toString().substring(10, 15));
   final TextEditingController mode = TextEditingController();
 
-  bool showInputField = false;
-  String dropDoctor = incomeCategory[0];
+  String dropCategory = incomeCategory[0];
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    category.text = incomeCategory[0];
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+      height: MediaQuery.of(context).size.height - 300,
+      padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
       child: Form(
           child: SingleChildScrollView(
         child: Column(
@@ -45,7 +54,7 @@ class _IncomeFormState extends State<IncomeForm> {
               validator: (p0) {},
             ),
             CustomTransactionField(
-              textEditingController: title,
+              textEditingController: amount,
               obsecure: false,
               label: "Amount",
               hint: 'Enter Amount',
@@ -53,18 +62,18 @@ class _IncomeFormState extends State<IncomeForm> {
               onTap: () {},
               validator: (p0) {},
             ),
-            CustomText(
+            const CustomText(
                 fontWeight: FontWeight.w500,
                 text: "Category",
                 size: 18,
                 colour: Colors.black),
-            SizedBox(
+            const SizedBox(
               height: 5,
             ),
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               decoration: BoxDecoration(
-                color: Color(0xFFF1F4F8),
+                color: const Color(0xFFF1F4F8),
                 borderRadius: BorderRadius.circular(10.0),
               ),
               width: MediaQuery.of(context).size.width,
@@ -72,8 +81,6 @@ class _IncomeFormState extends State<IncomeForm> {
               child: Center(
                 child: DropdownButton(
                   isExpanded: true,
-                  // alignment: AlignmentDirectional.bottomEnd,
-
                   style: const TextStyle(
                     fontWeight: FontWeight.w400,
                     color: Colors.black,
@@ -81,10 +88,8 @@ class _IncomeFormState extends State<IncomeForm> {
                   ),
                   underline: Container(),
                   elevation: 0,
-                  // Initial Value
-                  value: dropDoctor,
-                  hint: Text("Select Category"),
-                  // Down Arrow Icon
+                  value: dropCategory,
+                  hint: const Text("Select Category"),
                   icon: Icon(
                     Icons.keyboard_arrow_down,
                     color: Colors.black.withOpacity(0.9),
@@ -97,48 +102,18 @@ class _IncomeFormState extends State<IncomeForm> {
                       child: Text(items),
                     );
                   }).toList(),
-                  // After selecting the desired option,it will
-                  // change button value to selected value
                   onChanged: (String? newValue) {
                     setState(() {
-                      dropDoctor = newValue!;
+                      dropCategory = newValue!;
                       category.text = newValue;
-                      if (category.text ==
-                          incomeCategory[incomeCategory.length - 1]) {
-                        showInputField = true;
-                      } else {
-                        showInputField = false;
-                      }
                     });
                   },
                 ),
               ),
             ),
             const SizedBox(
-              height: 15.0,
+              height: 20.0,
             ),
-            if (showInputField)
-              Column(
-                children: [
-                  CustomTransactionField(
-                    obsecure: false,
-                    hint: "Enter Category",
-                    label: "Category",
-                    textEditingController: category,
-                    icon: Icons.category_outlined,
-                    onTap: () {},
-                    validator: (String? msg) {
-                      if (msg!.isEmpty) {
-                        return "This is required";
-                      }
-                      return null;
-                    },
-                  ),
-                  SizedBox(
-                    height: 15,
-                  ),
-                ],
-              ),
             CustomTransactionField(
               textEditingController: mode,
               obsecure: false,
@@ -198,11 +173,31 @@ class _IncomeFormState extends State<IncomeForm> {
               },
               validator: (p0) {},
             ),
-            Positioned(
-              bottom: 100,
-              child: FloatingActionButton(
-                onPressed: () {},
-                child: Icon(Icons.save),
+            GestureDetector(
+              onTap: () {
+                IncomeExpenseModel incomeExpenseModel = IncomeExpenseModel(
+                    title: title.text,
+                    amount: double.parse(amount.text),
+                    category: category.text,
+                    mode: mode.text,
+                    date: dateController.text,
+                    time: timecontroller.text);
+                FirebaseIncome().addIncome(incomeExpenseModel);
+              },
+              child: Container(
+                height: 50,
+                decoration: const BoxDecoration(
+                    color: navBackColor,
+                    borderRadius: BorderRadius.all(Radius.circular(20))),
+                child: const Center(
+                  child: Text(
+                    "Add Income",
+                    style: TextStyle(
+                        fontSize: 18,
+                        color: Colors.white,
+                        fontWeight: FontWeight.w500),
+                  ),
+                ),
               ),
             )
           ],

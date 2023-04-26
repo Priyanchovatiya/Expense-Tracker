@@ -23,7 +23,7 @@ class CustomTransactionField extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
-      margin: EdgeInsets.only(bottom: 10),
+      margin: EdgeInsets.only(bottom: 5),
       width: double.infinity,
       child: TextFormField(
           controller: textEditingController,
