@@ -25,6 +25,8 @@ List<String> expenseCategory = [
 
 final Color purple = Color(0xFFE3E0F1);
 final Color blueColor =  Color(0xFF2C2776);
+final Color korangeColor =  Color(0xFFFF674F);
+final Color kblueColor =  Color(0xFF00BFB8);
 final Color skyblue = Color(0xFFE1EBF1);
 final Color orange = Color(0xFFF1E6E1);
 final Color cream = Color(0xFFE7DFC6);

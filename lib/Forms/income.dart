@@ -37,7 +37,7 @@ class _IncomeFormState extends State<IncomeForm> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: purple,
+      color: greyBGColor,
       height: MediaQuery.of(context).size.height - 300,
       padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
       child: Form(
@@ -188,7 +188,7 @@ class _IncomeFormState extends State<IncomeForm> {
               child: Container(
                 height: 50,
                 decoration:  BoxDecoration(
-                    color: blueColor,
+                    color: korangeColor,
                     borderRadius: BorderRadius.all(Radius.circular(20))),
                 child: const Center(
                   child: Text(

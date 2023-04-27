@@ -5,6 +5,7 @@ import 'package:expensetracker/constant.dart';
 import 'package:expensetracker/customs/custom_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_advanced_segment/flutter_advanced_segment.dart';
+import 'package:lottie/lottie.dart';
 
 class AddScreen extends StatefulWidget {
   const AddScreen({Key? key}) : super(key: key);
@@ -18,7 +19,7 @@ class _AddScreenState extends State<AddScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: purple,
+        backgroundColor: greyBGColor,
         body: DefaultTabController(
           length: 3,
           child: Stack(
@@ -28,7 +29,7 @@ class _AddScreenState extends State<AddScreen> {
                 child: SegmentedTabControl(
                   radius: const Radius.circular(12),
                   backgroundColor: Colors.white,
-                  indicatorColor: navBackColor,
+                  indicatorColor: kblueColor,
                   tabTextColor: Colors.black45,
                   selectedTabTextColor: Colors.white,
                   squeezeIntensity: 2,
@@ -52,17 +53,22 @@ class _AddScreenState extends State<AddScreen> {
               // Sample pages
               Container(
                 padding: const EdgeInsets.only(top: 70),
-                child: TabBarView(
-                  physics: const BouncingScrollPhysics(),
+                child:  TabBarView(
+                  physics:  const BouncingScrollPhysics(),
                   children: [
                     IncomeForm(),
                     ExpenseForm(),
                     Center(
-                      child: CustomText(
-                          fontWeight: FontWeight.w500,
-                          text: "Coming Soon.....",
-                          size: 18,
-                          colour: Colors.black),
+                      child: Column(
+                        children:  [
+                          Lottie.asset('assests/lot/comingImg.json' , height: 300, width: 300),
+                          const CustomText(
+                              fontWeight: FontWeight.normal,
+                              text: "Coming Soon",
+                              size: 35,
+                              colour: Colors.black),
+                        ],
+                      ),
                     )
                   ],
                 ),

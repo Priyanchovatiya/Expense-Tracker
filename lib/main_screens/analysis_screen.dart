@@ -117,46 +117,48 @@ class _AnalysisScreenState extends State<AnalysisScreen> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Column(
-        children: [
-          const CustomText(
-              fontWeight: FontWeight.bold,
-              text: "Analysis",
-              size: 28,
-              colour: Colors.black),
-          const SizedBox(
-            height: 20,
-          ),
-          const CustomText(
-              fontWeight: FontWeight.bold,
-              text: "Income",
-              size: 24,
-              colour: Colors.black),
-          const SizedBox(
-            height: 20,
-          ),
-          AnalysisChart(
-            centertext: "Income",
-            dataMap: categoryWiseIncomeList,
-            total: income,
-          ),
-          const SizedBox(
-            height: 50,
-          ),
-          const CustomText(
-              fontWeight: FontWeight.bold,
-              text: "Expense",
-              size: 24,
-              colour: Colors.black),
-          const SizedBox(
-            height: 20,
-          ),
-          AnalysisChart(
-            centertext: "Expense",
-            dataMap: categoryWiseExpenseList,
-            total: expense,
-          ),
-        ],
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            const CustomText(
+                fontWeight: FontWeight.bold,
+                text: "Analysis",
+                size: 28,
+                colour: Colors.black),
+            const SizedBox(
+              height: 20,
+            ),
+            const CustomText(
+                fontWeight: FontWeight.bold,
+                text: "Income",
+                size: 24,
+                colour: Colors.black),
+            const SizedBox(
+              height: 20,
+            ),
+            // AnalysisChart(
+            //   centertext: "Income",
+            //   dataMap: categoryWiseIncomeList,
+            //   total: income,
+            // ),
+            const SizedBox(
+              height: 50,
+            ),
+            const CustomText(
+                fontWeight: FontWeight.bold,
+                text: "Expense",
+                size: 24,
+                colour: Colors.black),
+            const SizedBox(
+              height: 20,
+            ),
+            AnalysisChart(
+              centertext: "Expense",
+              dataMap: categoryWiseExpenseList,
+              total: expense,
+            ),
+          ],
+        ),
       ),
     );
   }
