@@ -71,12 +71,79 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
     });
 
     print("Totla balance is $total_balance");
+    print("Totla income balance is $income");
+    print("Totla expense balance is $expense");
+  }
+
+  Future<void> getCurrentMonthIncomeExpense() async {
+    final CollectionReference incomeCollectionRef = FirebaseFirestore.instance
+        .collection('users')
+        .doc(userEmail)
+        .collection("income-list");
+
+    final CollectionReference expenseCollectionRef = FirebaseFirestore.instance
+        .collection('users')
+        .doc(userEmail)
+        .collection("expense-list");
+
+    double currentMonthIncome = 0;
+    double currentMonthExpense = 0;
+
+    final DateTime now = DateTime.now();
+    final DateTime firstDayOfMonth = DateTime(now.year, now.month, 1);
+    final DateTime lastDayOfMonth = DateTime(now.year, now.month + 1, 0);
+
+    final QuerySnapshot incomeSnapshot = await incomeCollectionRef
+        .where('date',
+            isGreaterThanOrEqualTo:
+                DateFormat('dd-MM-yyyy').format(firstDayOfMonth),
+            isLessThanOrEqualTo:
+                DateFormat('dd-MM-yyyy').format(lastDayOfMonth))
+        .get();
+    final List<QueryDocumentSnapshot> incomeDocs = incomeSnapshot.docs;
+
+    incomeDocs.forEach((doc) {
+      String dateString = doc.get('date');
+      DateTime date = DateFormat('dd-MM-yyyy').parse(dateString);
+
+      if (date.month == now.month) {
+        currentMonthIncome += doc.get("amount") as double;
+      }
+    });
+
+    final QuerySnapshot expenseSnapshot = await expenseCollectionRef
+        .where('date',
+            isGreaterThanOrEqualTo:
+                DateFormat('dd-MM-yyyy').format(firstDayOfMonth),
+            isLessThanOrEqualTo:
+                DateFormat('dd-MM-yyyy').format(lastDayOfMonth))
+        .get();
+    final List<QueryDocumentSnapshot> expenseDocs = expenseSnapshot.docs;
+
+    expenseDocs.forEach((doc) {
+      String dateString = doc.get('date');
+      DateTime date = DateFormat('dd-MM-yyyy').parse(dateString);
+
+      if (date.month == now.month) {
+        currentMonthExpense += doc.get("amount") as double;
+      }
+    });
+
+    setState(() {
+      cur_month_income = currentMonthIncome;
+      cur_month_expense = currentMonthExpense;
+      cur_month_balance = cur_month_income - cur_month_expense;
+    });
+    print(cur_month_balance);
+    print(cur_month_income);
+    print(cur_month_expense);
   }
 
   @override
   void initState() {
     super.initState();
     getIncomeExpense();
+    getCurrentMonthIncomeExpense();
   }
 
   @override
@@ -99,6 +166,132 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
                 size: 30.0,
                 colour: Color(0xFF111111),
               ),
+              const SizedBox(
+                height: 15,
+              ),
+              const CustomText(
+                text: "Total Overview",
+                fontWeight: FontWeight.w800,
+                size: 22.0,
+                colour: Color(0xFF111111),
+              ),
+              const SizedBox(
+                height: 8.0,
+              ),
+              Container(
+                height: 175,
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.3),
+                      offset: const Offset(
+                        2.0,
+                        2.0,
+                      ),
+                      blurRadius: 4.0,
+                      spreadRadius: 1.0,
+                    ), //BoxShadow
+                    //BoxShadow
+                  ],
+                  borderRadius: BorderRadius.circular(20.0),
+                ),
+                child: Column(
+                  children: [
+                    Row(
+                      children: [
+                        Expanded(
+                            child: cueCard(
+                          colour: Colors.green,
+                          icon: CupertinoIcons.arrow_down,
+                          headText: "Income",
+                          data: income.toString(),
+                        )),
+                        Container(
+                          height: 105,
+                          width: 2.0,
+                          decoration: BoxDecoration(
+                            color: Color(0xFF111111).withOpacity(0.8),
+                            borderRadius: BorderRadius.circular(30),
+                          ),
+                        ),
+                        Expanded(
+                            child: cueCard(
+                          colour: Colors.red,
+                          icon: CupertinoIcons.arrow_up,
+                          headText: "Expenses",
+                          data: expense.toString(),
+                        )),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 5,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        CustomText(
+                            fontWeight: FontWeight.w500,
+                            text: "Total Balance",
+                            size: 18,
+                            colour: Colors.black),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        CustomText(
+                            fontWeight: FontWeight.w500,
+                            text: total_balance.toString(),
+                            size: 18,
+                            colour: Colors.black),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              // Container(
+              //   height: 50,
+              //   width: double.infinity,
+              //   decoration: BoxDecoration(
+              //     color: Colors.white,
+              //     boxShadow: [
+              //       BoxShadow(
+              //         color: Colors.black.withOpacity(0.3),
+              //         offset: const Offset(
+              //           2.0,
+              //           2.0,
+              //         ),
+              //         blurRadius: 4.0,
+              //         spreadRadius: 1.0,
+              //       ), //BoxShadow
+              //       //BoxShadow
+              //     ],
+              //     borderRadius: BorderRadius.circular(20.0),
+              //   ),
+              //   child: Center(
+              //     child: Row(
+              //       mainAxisAlignment: MainAxisAlignment.center,
+              //       children: [
+              //         CustomText(
+              //             fontWeight: FontWeight.w500,
+              //             text: "Total Balance",
+              //             size: 18,
+              //             colour: Colors.black),
+              //         SizedBox(
+              //           width: 10,
+              //         ),
+              //         CustomText(
+              //             fontWeight: FontWeight.w500,
+              //             text: total_balance.toString(),
+              //             size: 18,
+              //             colour: Colors.black),
+              //       ],
+              //     ),
+              //   ),
+              // ),
               const SizedBox(
                 height: 15,
               ),
@@ -144,7 +337,8 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
                         animation: true,
                         animationDuration: 1000,
                         lineHeight: 20.0,
-                        percent: (10 - ((month_limit - expense) / 1000)) / 10,
+                        percent: 0.5,
+                        //percent: (10 - ((month_limit - expense) / 1000)) / 10,
                         center:
                             Text("${100 - ((month_limit - expense) / 100)}%"),
                         progressColor: Colors.redAccent,
@@ -209,7 +403,7 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
                       colour: Colors.green,
                       icon: CupertinoIcons.arrow_down,
                       headText: "Income",
-                      data: income.toString(),
+                      data: cur_month_income.toString(),
                     )),
                     Container(
                       height: 105,
@@ -224,7 +418,7 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
                       colour: Colors.red,
                       icon: CupertinoIcons.arrow_up,
                       headText: "Expenses",
-                      data: expense.toString(),
+                      data: cur_month_expense.toString(),
                     )),
                   ],
                 ),
@@ -257,7 +451,7 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
                     children: [
                       CustomText(
                           fontWeight: FontWeight.w500,
-                          text: "Balance",
+                          text: "Month Balance",
                           size: 18,
                           colour: Colors.black),
                       SizedBox(
@@ -265,7 +459,7 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
                       ),
                       CustomText(
                           fontWeight: FontWeight.w500,
-                          text: total_balance.toString(),
+                          text: cur_month_balance.toString(),
                           size: 18,
                           colour: Colors.black),
                     ],
