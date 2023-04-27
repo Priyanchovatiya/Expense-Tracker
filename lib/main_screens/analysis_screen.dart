@@ -136,11 +136,11 @@ class _AnalysisScreenState extends State<AnalysisScreen> {
             const SizedBox(
               height: 20,
             ),
-            // AnalysisChart(
-            //   centertext: "Income",
-            //   dataMap: categoryWiseIncomeList,
-            //   total: income,
-            // ),
+            AnalysisChart(
+              centertext: "Income",
+              dataMap: categoryWiseIncomeList,
+              total: income,
+            ),
             const SizedBox(
               height: 50,
             ),

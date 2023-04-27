@@ -7,10 +7,12 @@ class cueCard extends StatelessWidget {
   final Color colour;
   final IconData icon;
   final String headText;
-  // final String data;
-  cueCard({required this.colour , required this.icon , required this.headText ,
-    // required this.data
-  });
+  final String data;
+  cueCard(
+      {required this.colour,
+      required this.icon,
+      required this.headText,
+      required this.data});
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +23,7 @@ class cueCard extends StatelessWidget {
           CircleAvatar(
             backgroundColor: colour.withOpacity(0.4),
             radius: 20.0,
-            child:  Icon(
+            child: Icon(
               icon,
               color: colour,
             ),
@@ -29,15 +31,27 @@ class cueCard extends StatelessWidget {
           const SizedBox(
             height: 8.0,
           ),
-          CustomText(fontWeight: FontWeight.w500, text: headText, size: 18, colour: Color(0xFF111111)),
+          CustomText(
+              fontWeight: FontWeight.w500,
+              text: headText,
+              size: 18,
+              colour: Color(0xFF111111)),
           const SizedBox(
             height: 5.0,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: const [
-              CustomText(fontWeight: FontWeight.bold, text: "₹", size: 18, colour: Color(0xFF111111)),
-              CustomText(fontWeight: FontWeight.bold, text: '....', size: 18, colour: Color(0xFF111111)),
+            children: [
+              CustomText(
+                  fontWeight: FontWeight.bold,
+                  text: "₹",
+                  size: 18,
+                  colour: Color(0xFF111111)),
+              CustomText(
+                  fontWeight: FontWeight.bold,
+                  text: data.toString(),
+                  size: 18,
+                  colour: Color(0xFF111111)),
               // CustomText(fontWeight: FontWeight.bold, text: data.toString(), size: 18, colour: Color(0xFF111111)),
             ],
           ),

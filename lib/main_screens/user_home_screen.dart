@@ -3,6 +3,9 @@ import 'package:expensetracker/constant.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:percent_indicator/circular_percent_indicator.dart';
+import 'package:percent_indicator/linear_percent_indicator.dart';
+import 'package:intl/intl.dart';
 
 import '../customs/custom_cue_card.dart';
 import '../customs/custom_text.dart';
@@ -15,8 +18,13 @@ class UserHomeScreen extends StatefulWidget {
 }
 
 class _UserHomeScreenState extends State<UserHomeScreen> {
-  late var income;
-  late var expense;
+  double income = 0;
+  double expense = 0;
+  double cur_month_income = 0;
+  double cur_month_expense = 0;
+  double total_balance = 0;
+  double cur_month_balance = 0;
+  int month_limit = 0;
 
   final userEmail = FirebaseAuth.instance.currentUser!.email;
 
@@ -33,6 +41,14 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
 
     double totalIncome = 0;
     double totalExpense = 0;
+
+    final DocumentReference userDocRef =
+        FirebaseFirestore.instance.collection('users').doc(userEmail);
+
+    final DocumentSnapshot userDoc = await userDocRef.get();
+    setState(() {
+      month_limit = userDoc.get("month-limit") as int;
+    });
 
     final QuerySnapshot incomeSnapshot = await incomeCollectionRef.get();
     final List<QueryDocumentSnapshot> incomeDocs = incomeSnapshot.docs;
@@ -51,7 +67,10 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
     setState(() {
       income = totalIncome;
       expense = totalExpense;
+      total_balance = totalIncome - totalExpense;
     });
+
+    print("Totla balance is $total_balance");
   }
 
   @override
@@ -96,37 +115,58 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
                 height: 150,
                 width: double.infinity,
                 decoration: BoxDecoration(
-                  gradient: const LinearGradient(
-
-                    colors: [Color(0xFFFD203B), Color(0xFFFD5872)],
-                    begin: Alignment.bottomCenter,
-                    end: Alignment.topCenter,
-                  ),
-                  borderRadius: BorderRadius.circular(35.0),
+                  color: Colors.black.withOpacity(0.8),
+                  // gradient: const LinearGradient(
+                  //   colors: [Color(0xFFFD203B), Color(0xFFFD5872)],
+                  //   begin: Alignment.bottomCenter,
+                  //   end: Alignment.topCenter,
+                  // ),
+                  borderRadius: BorderRadius.circular(15.0),
                 ),
                 child: Padding(
-                  padding: const EdgeInsets.only(top:15.0 , right: 15.0, left: 12.0),
+                  padding:
+                      const EdgeInsets.only(top: 15.0, right: 15.0, left: 12.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children:  [
-                      CustomText(fontWeight: FontWeight.bold, text: '90%', size: 25.0, colour: Colors.white),
-
-                      const SizedBox( height: 20.0,),
-                      const Divider(
-
-                        color: Colors.white,
-                        thickness: 10,
-
+                    children: [
+                      CustomText(
+                          fontWeight: FontWeight.bold,
+                          text:
+                              ("Used: ${100 - ((month_limit - expense) / 100)}%"),
+                          size: 25.0,
+                          colour: Colors.white),
+                      const SizedBox(
+                        height: 20.0,
                       ),
-                      const SizedBox( height: 20.0,),
+                      LinearPercentIndicator(
+                        width: MediaQuery.of(context).size.width - 70,
+                        animation: true,
+                        animationDuration: 1000,
+                        lineHeight: 20.0,
+                        percent: (10 - ((month_limit - expense) / 1000)) / 10,
+                        center:
+                            Text("${100 - ((month_limit - expense) / 100)}%"),
+                        progressColor: Colors.redAccent,
+                        barRadius: Radius.circular(20),
+                      ),
+                      const SizedBox(
+                        height: 20.0,
+                      ),
                       Row(
-                        children:  const [
-                           CustomText(fontWeight: FontWeight.w500, text: 'Total Used Money : ', size: 18.0, colour: Colors.white),
-                           CustomText(fontWeight: FontWeight.bold, text: '10000', size: 25.0, colour: Colors.white),
+                        children: [
+                          CustomText(
+                              fontWeight: FontWeight.w500,
+                              text: 'Moth Limit : ',
+                              size: 18.0,
+                              colour: Colors.white),
+                          CustomText(
+                              fontWeight: FontWeight.bold,
+                              text: month_limit.toString(),
+                              size: 25.0,
+                              colour: Colors.white),
                         ],
                       )
-
                     ],
                   ),
                 ),
@@ -166,11 +206,11 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
                   children: [
                     Expanded(
                         child: cueCard(
-                          colour: Colors.green,
-                          icon: CupertinoIcons.arrow_down,
-                          headText: "Income",
-                          // data: income.toString(),
-                        )),
+                      colour: Colors.green,
+                      icon: CupertinoIcons.arrow_down,
+                      headText: "Income",
+                      data: income.toString(),
+                    )),
                     Container(
                       height: 105,
                       width: 2.0,
@@ -181,15 +221,57 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
                     ),
                     Expanded(
                         child: cueCard(
-                          colour: Colors.red,
-                          icon: CupertinoIcons.arrow_up,
-                          headText: "Expenses",
-                          // data: expense.toString(),
-                        )),
+                      colour: Colors.red,
+                      icon: CupertinoIcons.arrow_up,
+                      headText: "Expenses",
+                      data: expense.toString(),
+                    )),
                   ],
                 ),
               ),
-
+              SizedBox(
+                height: 20,
+              ),
+              Container(
+                height: 50,
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.3),
+                      offset: const Offset(
+                        2.0,
+                        2.0,
+                      ),
+                      blurRadius: 4.0,
+                      spreadRadius: 1.0,
+                    ), //BoxShadow
+                    //BoxShadow
+                  ],
+                  borderRadius: BorderRadius.circular(20.0),
+                ),
+                child: Center(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      CustomText(
+                          fontWeight: FontWeight.w500,
+                          text: "Balance",
+                          size: 18,
+                          colour: Colors.black),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      CustomText(
+                          fontWeight: FontWeight.w500,
+                          text: total_balance.toString(),
+                          size: 18,
+                          colour: Colors.black),
+                    ],
+                  ),
+                ),
+              )
             ],
           ),
         ),

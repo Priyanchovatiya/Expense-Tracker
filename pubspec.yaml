@@ -50,6 +50,7 @@ dependencies:
   charts_flutter: ^0.12.0
   pie_chart: ^5.3.2
   lottie: ^2.3.2
+  percent_indicator: ^4.2.3
 
 dev_dependencies:
   flutter_test:
