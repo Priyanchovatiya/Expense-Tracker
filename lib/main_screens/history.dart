@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:expensetracker/customs/custom_text.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -90,12 +91,25 @@ class _HistoryScreenState extends State<HistoryScreen> {
               final Map<String, dynamic> transaction = mergedList[index];
               final bool isIncome = transaction['type'] == 'income';
               return Container(
-                color: isIncome ? Colors.green : Colors.red,
-                child: ListTile(
-                  title: Text(transaction['title']),
-                  subtitle: Text(transaction['category']),
-                  trailing: Text('\$${transaction['amount']}'),
+                padding: EdgeInsets.all(8.0),
+                decoration: BoxDecoration(
+                  // color: isIncome ? Colors.green : Colors.red,
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(8.0),
                 ),
+
+                child: ListTile(
+                  title: Text(transaction['category']),
+                  subtitle: Text(transaction['month'] + transaction['time'] ),
+                  trailing: CustomText(
+                    text: '\$${transaction['amount']}',
+                    fontWeight: FontWeight.w700,
+                    size: 15.0,
+                    colour: isIncome ? Colors.green : Colors.red,
+                  ),
+                  // trailing: isIncome ? Text('\$${transaction['amount']}') : Text('\$${transaction['amount']}'
+                  ),
+
               );
             },
           );
