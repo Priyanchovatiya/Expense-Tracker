@@ -51,6 +51,8 @@ dependencies:
   pie_chart: ^5.3.2
   lottie: ^2.3.2
   percent_indicator: ^4.2.3
+  google_mobile_ads: ^3.0.0
+  sharedpreference: ^0.0.1
 
 dev_dependencies:
   flutter_test:
