@@ -169,6 +169,80 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
               const SizedBox(
                 height: 15,
               ),
+              Container(
+                height:30.0,
+                width: double.infinity,
+                child: Row(
+                  children: [
+                    Expanded(
+                        child: Container(
+                          height: 30.0,
+                          padding: const EdgeInsets.only(left: 10.0),
+                          decoration: BoxDecoration(
+                            color: Colors.blue.withOpacity(0.3),
+                            borderRadius: BorderRadius.circular(12.0),
+
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children:  [
+                              const CustomText(
+                                  fontWeight: FontWeight.w500,
+                                  text: "Total Balance: ",
+                                  size: 12,
+                                  colour: Colors.blue),
+                              const SizedBox(
+                                width: 5,
+                              ),
+                              CustomText(
+                                  fontWeight: FontWeight.bold,
+                                  text: total_balance.toString(),
+
+                                  size: 15,
+                                  colour: Colors.blue),
+                            ],
+                          ),
+
+                    )),
+                    const SizedBox(
+                      width: 10.0,
+                    ),
+                    Expanded(
+                        child: Container(
+                          height: 30.0,
+                          padding: const EdgeInsets.only(right: 10.0),
+                          decoration: BoxDecoration(
+                            color: Colors.blue.withOpacity(0.3),
+                            borderRadius: BorderRadius.circular(12.0),
+
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              const CustomText(
+                                  fontWeight: FontWeight.w500,
+                                  text: "Monthly Balance: ",
+                                  size: 12,
+                                  colour: Colors.blue),
+                              const SizedBox(
+                                width: 5,
+                              ),
+                              CustomText(
+                                  fontWeight: FontWeight.bold,
+                                  text: total_balance.toString(),
+
+                                  size: 15,
+                                  colour: Colors.blue),
+                            ],
+                          ),
+
+                    )),
+                  ],
+                ),
+              ),
+              const SizedBox(
+                height: 5,
+              ),
               const CustomText(
                 text: "Total Overview",
                 fontWeight: FontWeight.w800,
@@ -179,7 +253,7 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
                 height: 8.0,
               ),
               Container(
-                height: 175,
+
                 width: double.infinity,
                 decoration: BoxDecoration(
                   color: Colors.white,
@@ -197,101 +271,35 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
                   ],
                   borderRadius: BorderRadius.circular(20.0),
                 ),
-                child: Column(
+                child: Row(
                   children: [
-                    Row(
-                      children: [
-                        Expanded(
-                            child: cueCard(
-                          colour: Colors.green,
-                          icon: CupertinoIcons.arrow_down,
-                          headText: "Income",
-                          data: income.toString(),
-                        )),
-                        Container(
-                          height: 105,
-                          width: 2.0,
-                          decoration: BoxDecoration(
-                            color: Color(0xFF111111).withOpacity(0.8),
-                            borderRadius: BorderRadius.circular(30),
-                          ),
-                        ),
-                        Expanded(
-                            child: cueCard(
-                          colour: Colors.red,
-                          icon: CupertinoIcons.arrow_up,
-                          headText: "Expenses",
-                          data: expense.toString(),
-                        )),
-                      ],
+                    Expanded(
+                        child: cueCard(
+                      colour: Colors.green,
+                      icon: CupertinoIcons.arrow_down,
+                      headText: "Income",
+                      data: income.toString(),
+                    )),
+                    Container(
+                      height: 105,
+                      width: 2.0,
+                      decoration: BoxDecoration(
+                        color: Color(0xFF111111).withOpacity(0.8),
+                        borderRadius: BorderRadius.circular(30),
+                      ),
                     ),
-                    SizedBox(
-                      height: 5,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        CustomText(
-                            fontWeight: FontWeight.w500,
-                            text: "Total Balance",
-                            size: 18,
-                            colour: Colors.black),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        CustomText(
-                            fontWeight: FontWeight.w500,
-                            text: total_balance.toString(),
-                            size: 18,
-                            colour: Colors.black),
-                      ],
-                    ),
+                    Expanded(
+                        child: cueCard(
+                      colour: Colors.red,
+                      icon: CupertinoIcons.arrow_up,
+                      headText: "Expenses",
+                      data: expense.toString(),
+                    )),
                   ],
                 ),
               ),
-              SizedBox(
-                height: 20,
-              ),
-              // Container(
-              //   height: 50,
-              //   width: double.infinity,
-              //   decoration: BoxDecoration(
-              //     color: Colors.white,
-              //     boxShadow: [
-              //       BoxShadow(
-              //         color: Colors.black.withOpacity(0.3),
-              //         offset: const Offset(
-              //           2.0,
-              //           2.0,
-              //         ),
-              //         blurRadius: 4.0,
-              //         spreadRadius: 1.0,
-              //       ), //BoxShadow
-              //       //BoxShadow
-              //     ],
-              //     borderRadius: BorderRadius.circular(20.0),
-              //   ),
-              //   child: Center(
-              //     child: Row(
-              //       mainAxisAlignment: MainAxisAlignment.center,
-              //       children: [
-              //         CustomText(
-              //             fontWeight: FontWeight.w500,
-              //             text: "Total Balance",
-              //             size: 18,
-              //             colour: Colors.black),
-              //         SizedBox(
-              //           width: 10,
-              //         ),
-              //         CustomText(
-              //             fontWeight: FontWeight.w500,
-              //             text: total_balance.toString(),
-              //             size: 18,
-              //             colour: Colors.black),
-              //       ],
-              //     ),
-              //   ),
-              // ),
+
+
               const SizedBox(
                 height: 15,
               ),
@@ -308,12 +316,12 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
                 height: 150,
                 width: double.infinity,
                 decoration: BoxDecoration(
-                  color: Colors.black.withOpacity(0.8),
-                  // gradient: const LinearGradient(
-                  //   colors: [Color(0xFFFD203B), Color(0xFFFD5872)],
-                  //   begin: Alignment.bottomCenter,
-                  //   end: Alignment.topCenter,
-                  // ),
+                  // color: Colors.black.withOpacity(0.8),
+                  gradient: const LinearGradient(
+                    colors: [Color(0xFF111111), Color(0xFF2F2F2F)],
+                    begin: Alignment.bottomCenter,
+                    end: Alignment.topCenter,
+                  ),
                   borderRadius: BorderRadius.circular(15.0),
                 ),
                 child: Padding(
@@ -426,46 +434,46 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
               SizedBox(
                 height: 20,
               ),
-              Container(
-                height: 50,
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withOpacity(0.3),
-                      offset: const Offset(
-                        2.0,
-                        2.0,
-                      ),
-                      blurRadius: 4.0,
-                      spreadRadius: 1.0,
-                    ), //BoxShadow
-                    //BoxShadow
-                  ],
-                  borderRadius: BorderRadius.circular(20.0),
-                ),
-                child: Center(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      CustomText(
-                          fontWeight: FontWeight.w500,
-                          text: "Month Balance",
-                          size: 18,
-                          colour: Colors.black),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      CustomText(
-                          fontWeight: FontWeight.w500,
-                          text: cur_month_balance.toString(),
-                          size: 18,
-                          colour: Colors.black),
-                    ],
-                  ),
-                ),
-              )
+              // Container(
+              //   height: 50,
+              //   width: double.infinity,
+              //   decoration: BoxDecoration(
+              //     color: Colors.white,
+              //     boxShadow: [
+              //       BoxShadow(
+              //         color: Colors.black.withOpacity(0.3),
+              //         offset: const Offset(
+              //           2.0,
+              //           2.0,
+              //         ),
+              //         blurRadius: 4.0,
+              //         spreadRadius: 1.0,
+              //       ), //BoxShadow
+              //       //BoxShadow
+              //     ],
+              //     borderRadius: BorderRadius.circular(20.0),
+              //   ),
+              //   child: Center(
+              //     child: Row(
+              //       mainAxisAlignment: MainAxisAlignment.center,
+              //       children: [
+              //         CustomText(
+              //             fontWeight: FontWeight.w500,
+              //             text: "Month Balance",
+              //             size: 18,
+              //             colour: Colors.black),
+              //         SizedBox(
+              //           width: 10,
+              //         ),
+              //         CustomText(
+              //             fontWeight: FontWeight.w500,
+              //             text: cur_month_balance.toString(),
+              //             size: 18,
+              //             colour: Colors.black),
+              //       ],
+              //     ),
+              //   ),
+              // )
             ],
           ),
         ),
