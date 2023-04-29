@@ -1,5 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.origo.expense.tracker">
+    package="com.origo.expense">
+    <uses-permission android:name="android.permission.INTERNET" />
    <application
         android:label="expensetracker"
         android:name="${applicationName}"

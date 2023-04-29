@@ -100,7 +100,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
 
                 child: ListTile(
                   title: Text(transaction['category']),
-                  subtitle: Text(transaction['month'] + transaction['time'] ),
+                  subtitle: Text(transaction['date'] ),
                   trailing: CustomText(
                     text: '\$${transaction['amount']}',
                     fontWeight: FontWeight.w700,

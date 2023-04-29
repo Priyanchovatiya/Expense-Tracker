@@ -59,12 +59,72 @@
     },
     {
       "client_info": {
+        "mobilesdk_app_id": "1:1020558899535:android:fd580a4fe31b6e88082d3a",
+        "android_client_info": {
+          "package_name": "com.origo.expense"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1020558899535-2ptnptdu0bu4kc5f3701di00katran0t.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.origo.expense",
+            "certificate_hash": "ed5f00050385ed2cca2e5f2e35b4757e7904c7fc"
+          }
+        },
+        {
+          "client_id": "1020558899535-vne8i5t6br2lcbf8e4ctuciiojm3mni6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA5S_KutdgkHqiEfAF5rD1aQTj2h_rhzRk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1020558899535-pa8parp0br6m79cg35od0qae6o2rgjem.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1020558899535-ifpjjbv6ogvjt36g721ms8hc9qggvh1q.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.expensetracker"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:1020558899535:android:de5cbdd4d1a22e0d082d3a",
         "android_client_info": {
           "package_name": "com.origo.expense.tracker"
         }
       },
       "oauth_client": [
+        {
+          "client_id": "1020558899535-6patdog9cvaco4sv8ur21610t5eld03p.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.origo.expense.tracker",
+            "certificate_hash": "f85ff19634cbbb57dfd4995fbb3646695efd4a46"
+          }
+        },
+        {
+          "client_id": "1020558899535-89g95fch9l0b0irhr6976ag0h341k0m7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.origo.expense.tracker",
+            "certificate_hash": "ed5f00050385ed2cca2e5f2e35b4757e7904c7fc"
+          }
+        },
         {
           "client_id": "1020558899535-vne8i5t6br2lcbf8e4ctuciiojm3mni6.apps.googleusercontent.com",
           "client_type": 3
