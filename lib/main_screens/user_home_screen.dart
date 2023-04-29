@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:expensetracker/constant.dart';
+import 'package:expensetracker/customs/custome_field.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -8,6 +9,7 @@ import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:intl/intl.dart';
 
 import '../customs/custom_cue_card.dart';
+import '../customs/custom_field_income.dart';
 import '../customs/custom_text.dart';
 
 class UserHomeScreen extends StatefulWidget {
@@ -27,6 +29,28 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
   int month_limit = 0;
 
   final userEmail = FirebaseAuth.instance.currentUser!.email;
+
+  var email;
+
+  Future<void> getCurrentUser() async {
+    final FirebaseAuth _auth = FirebaseAuth.instance;
+    var user = _auth.currentUser;
+    setState(() {
+      email = user!.email;
+    });
+    print(user!.email);
+  }
+
+  Future<void> addMonthLimit() async {
+    final CollectionReference addUserCollection =
+        FirebaseFirestore.instance.collection("users");
+    DocumentSnapshot<Object?> document =
+        await addUserCollection.doc(email).get();
+    if (document.exists) {
+    } else {
+      await addUserCollection.doc(email).set({'month-limit': '0'});
+    }
+  }
 
   Future<void> getIncomeExpense() async {
     final CollectionReference incomeCollectionRef = FirebaseFirestore.instance
@@ -139,11 +163,62 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
     print(cur_month_expense);
   }
 
+  Future<void> _showMyDialog() async {
+    TextEditingController limit = TextEditingController();
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Set Month Limit'),
+          content: SingleChildScrollView(
+            child: CustomTransactionField(
+              textEditingController: limit,
+              obsecure: false,
+              label: "Amount",
+              hint: 'Enter Amount',
+              icon: CupertinoIcons.money_dollar_circle,
+              onTap: () {},
+              validator: null,
+            ),
+          ),
+          actions: <Widget>[
+            InkWell(
+              child: Container(
+                height: 50.0,
+                decoration: BoxDecoration(
+                  color: korangeColor,
+                  borderRadius: BorderRadius.circular(12.0),
+                ),
+                child: const Center(child: CustomText(text: "Set As Month-Limit",
+                fontWeight: FontWeight.w500,
+                colour: Colors.white,
+                size: 15,)),
+              ),
+              onTap: () {
+                final CollectionReference addUserCollection =
+                    FirebaseFirestore.instance.collection("users");
+                setState(() {
+                  addUserCollection
+                      .doc(email)
+                      .set({'month-limit': int.parse(limit.text)});
+                });
+
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   void initState() {
     super.initState();
     getIncomeExpense();
     getCurrentMonthIncomeExpense();
+    getCurrentUser();
   }
 
   @override
@@ -170,72 +245,66 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
                 height: 15,
               ),
               Container(
-                height:30.0,
+                height: 30.0,
                 width: double.infinity,
                 child: Row(
                   children: [
                     Expanded(
                         child: Container(
-                          height: 30.0,
-                          padding: const EdgeInsets.only(left: 10.0),
-                          decoration: BoxDecoration(
-                            color: Colors.blue.withOpacity(0.3),
-                            borderRadius: BorderRadius.circular(12.0),
-
+                      height: 30.0,
+                      padding: const EdgeInsets.only(left: 10.0),
+                      decoration: BoxDecoration(
+                        color: Colors.blue.withOpacity(0.3),
+                        borderRadius: BorderRadius.circular(12.0),
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const CustomText(
+                              fontWeight: FontWeight.w500,
+                              text: "Total Balance: ",
+                              size: 12,
+                              colour: Colors.blue),
+                          const SizedBox(
+                            width: 5,
                           ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children:  [
-                              const CustomText(
-                                  fontWeight: FontWeight.w500,
-                                  text: "Total Balance: ",
-                                  size: 12,
-                                  colour: Colors.blue),
-                              const SizedBox(
-                                width: 5,
-                              ),
-                              CustomText(
-                                  fontWeight: FontWeight.bold,
-                                  text: total_balance.toString(),
-
-                                  size: 15,
-                                  colour: Colors.blue),
-                            ],
-                          ),
-
+                          CustomText(
+                              fontWeight: FontWeight.bold,
+                              text: total_balance.toString(),
+                              size: 15,
+                              colour: Colors.blue),
+                        ],
+                      ),
                     )),
                     const SizedBox(
                       width: 10.0,
                     ),
                     Expanded(
                         child: Container(
-                          height: 30.0,
-                          padding: const EdgeInsets.only(right: 10.0),
-                          decoration: BoxDecoration(
-                            color: Colors.blue.withOpacity(0.3),
-                            borderRadius: BorderRadius.circular(12.0),
-
+                      height: 30.0,
+                      padding: const EdgeInsets.only(right: 10.0),
+                      decoration: BoxDecoration(
+                        color: Colors.blue.withOpacity(0.3),
+                        borderRadius: BorderRadius.circular(12.0),
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const CustomText(
+                              fontWeight: FontWeight.w500,
+                              text: "Monthly Balance: ",
+                              size: 12,
+                              colour: Colors.blue),
+                          const SizedBox(
+                            width: 5,
                           ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              const CustomText(
-                                  fontWeight: FontWeight.w500,
-                                  text: "Monthly Balance: ",
-                                  size: 12,
-                                  colour: Colors.blue),
-                              const SizedBox(
-                                width: 5,
-                              ),
-                              CustomText(
-                                  fontWeight: FontWeight.bold,
-                                  text: total_balance.toString(),
-
-                                  size: 15,
-                                  colour: Colors.blue),
-                            ],
-                          ),
-
+                          CustomText(
+                              fontWeight: FontWeight.bold,
+                              text: total_balance.toString(),
+                              size: 15,
+                              colour: Colors.blue),
+                        ],
+                      ),
                     )),
                   ],
                 ),
@@ -253,7 +322,6 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
                 height: 8.0,
               ),
               Container(
-
                 width: double.infinity,
                 decoration: BoxDecoration(
                   color: Colors.white,
@@ -299,7 +367,6 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
                 ),
               ),
 
-
               const SizedBox(
                 height: 15,
               ),
@@ -324,54 +391,73 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
                   ),
                   borderRadius: BorderRadius.circular(15.0),
                 ),
-                child: Padding(
-                  padding:
-                      const EdgeInsets.only(top: 15.0, right: 15.0, left: 12.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      CustomText(
-                          fontWeight: FontWeight.bold,
-                          text:
-                              ("Used: ${100 - ((month_limit - expense) / 100)}%"),
-                          size: 25.0,
-                          colour: Colors.white),
-                      const SizedBox(
-                        height: 20.0,
+                child: month_limit == 0
+                    ? InkWell(
+                      onTap: () {
+
+                        _showMyDialog();
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 55.0 , vertical: 55.0),
+                        child: Container(
+                          height: 80.0,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(12.0),
+                          ),
+                          child:  Center(
+                              child: CustomText(text: "Set Your Month-Limit", fontWeight: FontWeight.w500, size : 15.0 ,colour: Colors.black, )),
+                        ),
                       ),
-                      LinearPercentIndicator(
-                        width: MediaQuery.of(context).size.width - 70,
-                        animation: true,
-                        animationDuration: 1000,
-                        lineHeight: 20.0,
-                        percent: 0.5,
-                        //percent: (10 - ((month_limit - expense) / 1000)) / 10,
-                        center:
-                            Text("${100 - ((month_limit - expense) / 100)}%"),
-                        progressColor: Colors.redAccent,
-                        barRadius: Radius.circular(20),
+                    )
+                    : Padding(
+                        padding: const EdgeInsets.only(
+                            top: 15.0, right: 15.0, left: 12.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            CustomText(
+                                fontWeight: FontWeight.bold,
+                                text:
+                                    ("Used: ${100 - ((month_limit - expense) / 100)}%"),
+                                size: 25.0,
+                                colour: Colors.white),
+                            const SizedBox(
+                              height: 20.0,
+                            ),
+                            LinearPercentIndicator(
+                              width: MediaQuery.of(context).size.width - 70,
+                              animation: true,
+                              animationDuration: 1000,
+                              lineHeight: 20.0,
+                              percent: 0.5,
+                              //percent: (10 - ((month_limit - expense) / 1000)) / 10,
+                              center: Text(
+                                  "${100 - ((month_limit - expense) / 100)}%"),
+                              progressColor: Colors.redAccent,
+                              barRadius: Radius.circular(20),
+                            ),
+                            const SizedBox(
+                              height: 20.0,
+                            ),
+                            Row(
+                              children: [
+                                CustomText(
+                                    fontWeight: FontWeight.w500,
+                                    text: 'Moth Limit : ',
+                                    size: 18.0,
+                                    colour: Colors.white),
+                                CustomText(
+                                    fontWeight: FontWeight.bold,
+                                    text: month_limit.toString(),
+                                    size: 25.0,
+                                    colour: Colors.white),
+                              ],
+                            )
+                          ],
+                        ),
                       ),
-                      const SizedBox(
-                        height: 20.0,
-                      ),
-                      Row(
-                        children: [
-                          CustomText(
-                              fontWeight: FontWeight.w500,
-                              text: 'Moth Limit : ',
-                              size: 18.0,
-                              colour: Colors.white),
-                          CustomText(
-                              fontWeight: FontWeight.bold,
-                              text: month_limit.toString(),
-                              size: 25.0,
-                              colour: Colors.white),
-                        ],
-                      )
-                    ],
-                  ),
-                ),
               ),
               const SizedBox(
                 height: 20.0,
