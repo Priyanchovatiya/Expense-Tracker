@@ -1,4 +1,5 @@
 import 'package:custom_navigation_bar/custom_navigation_bar.dart';
+import 'package:expensetracker/controller/ads.dart';
 import 'package:expensetracker/main_screens/add_screen.dart';
 import 'package:expensetracker/main_screens/analysis_screen.dart';
 import 'package:expensetracker/main_screens/history.dart';
@@ -53,6 +54,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   icon: Icon(CupertinoIcons.profile_circled)),
             ],
             onTap: (index) {
+             // Ads().loadIntertial();
               setState(() {
                 _currentIndex = index;
               });

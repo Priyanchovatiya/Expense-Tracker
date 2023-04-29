@@ -38,7 +38,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
       expenseDocs = expenseSnap.docs;
     }
 
-   mergedList = [];
+    mergedList = [];
     incomeDocs.forEach((doc) {
       mergedList.add({
         "date": doc.get("date"),
@@ -59,18 +59,16 @@ class _HistoryScreenState extends State<HistoryScreen> {
         "amount": doc.get("amount")
       });
     });
-    setState(() {
-      
+    setState(() {});
+
+    mergedList.sort((a, b) {
+      DateTime aTime =
+          DateFormat('dd-MM-yyyy hh:mm').parse('${a['date']} ${a['time']}');
+      DateTime bTime =
+          DateFormat('dd-MM-yyyy hh:mm').parse('${b['date']} ${b['time']}');
+      return bTime.compareTo(aTime);
     });
-
-   mergedList.sort((a, b) {
-  DateTime aTime = DateFormat('dd-MM-yyyy hh:mm').parse('${a['date']} ${a['time']}');
-  DateTime bTime = DateFormat('dd-MM-yyyy hh:mm').parse('${b['date']} ${b['time']}');
-  return bTime.compareTo(aTime);
-});
-
- 
-   }
+  }
 
   @override
   void initState() {
@@ -81,37 +79,79 @@ class _HistoryScreenState extends State<HistoryScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return mergedList.length == 0
-        ? Center(
-            child: CircularProgressIndicator(),
-          )
-        : ListView.builder(
-            itemCount: mergedList.length,
-            itemBuilder: (BuildContext context, int index) {
-              final Map<String, dynamic> transaction = mergedList[index];
-              final bool isIncome = transaction['type'] == 'income';
-              return Container(
-                padding: EdgeInsets.all(8.0),
-                decoration: BoxDecoration(
-                  // color: isIncome ? Colors.green : Colors.red,
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(8.0),
+    return SafeArea(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            height: 50,
+            child: const CustomText(
+              text: "History",
+              fontWeight: FontWeight.w500,
+              size: 30.0,
+              colour: Color(0xFF111111),
+            ),
+          ),
+          mergedList.length == 0
+              ? Center(
+                  child: CircularProgressIndicator(),
+                )
+              : Container(
+                  height: MediaQuery.of(context).size.height - 80,
+                  child: ListView.builder(
+                    itemCount: mergedList.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      final Map<String, dynamic> transaction =
+                          mergedList[index];
+                      final bool isIncome = transaction['type'] == 'income';
+                      return Container(
+                        padding: EdgeInsets.all(8.0),
+                        margin: EdgeInsets.only(left: 8, right: 8, top: 8),
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            boxShadow: [
+                              BoxShadow(blurRadius: 5, offset: Offset(2, 0))
+                            ],
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(10))),
+                        child: ListTile(
+                          title: Text(
+                            transaction['category'],
+                            style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.w500,
+                                color: Colors.black),
+                          ),
+                          subtitle: Padding(
+                            padding: const EdgeInsets.only(top: 10.0),
+                            child: Text(
+                              transaction['date'].toString() +
+                                  " " +
+                                  transaction['time'].toString(),
+                              style: TextStyle(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w500,
+                                  color: Colors.black),
+                            ),
+                          ),
+                          trailing: CustomText(
+                            text: '\$${transaction['amount']}',
+                            fontWeight: FontWeight.w700,
+                            size: 18.0,
+                            colour: isIncome
+                                ? Colors.green.withOpacity(0.9)
+                                : Colors.redAccent.withOpacity(0.9),
+                          ),
+                          // trailing: isIncome ? Text('\$${transaction['amount']}') : Text('\$${transaction['amount']}'
+                        ),
+                      );
+                    },
+                  ),
                 ),
 
-                child: ListTile(
-                  title: Text(transaction['category']),
-                  subtitle: Text(transaction['date'] ),
-                  trailing: CustomText(
-                    text: '\$${transaction['amount']}',
-                    fontWeight: FontWeight.w700,
-                    size: 15.0,
-                    colour: isIncome ? Colors.green : Colors.red,
-                  ),
-                  // trailing: isIncome ? Text('\$${transaction['amount']}') : Text('\$${transaction['amount']}'
-                  ),
+        ],
+      ),
+    );
 
-              );
-            },
-          );
   }
 }

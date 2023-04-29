@@ -2,9 +2,9 @@ import 'package:animated_segmented_tab_control/animated_segmented_tab_control.da
 import 'package:expensetracker/Forms/expense.dart';
 import 'package:expensetracker/Forms/income.dart';
 import 'package:expensetracker/constant.dart';
+import 'package:expensetracker/controller/ads.dart';
 import 'package:expensetracker/customs/custom_text.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_advanced_segment/flutter_advanced_segment.dart';
 import 'package:lottie/lottie.dart';
 
 class AddScreen extends StatefulWidget {
@@ -53,22 +53,24 @@ class _AddScreenState extends State<AddScreen> {
               // Sample pages
               Container(
                 padding: const EdgeInsets.only(top: 70),
-                child:  TabBarView(
-                  physics:  const BouncingScrollPhysics(),
+                child: TabBarView(
+                  physics: const BouncingScrollPhysics(),
                   children: [
-                    IncomeForm(),
-                    ExpenseForm(),
-                    Center(
-                      child: Column(
-                        children:  [
-                          Lottie.asset('assests/lot/comingImg.json' , height: 300, width: 300),
-                          const CustomText(
-                              fontWeight: FontWeight.normal,
-                              text: "Coming Soon",
-                              size: 35,
-                              colour: Colors.black),
-                        ],
-                      ),
+                    GestureDetector(
+                        onTap: () {
+                          Ads().storevalue();
+                        },
+                        child: const IncomeForm()),
+                    GestureDetector(
+                      onTap: () {
+                          Ads().storevalue();
+                        },child: const ExpenseForm()),
+                    const Center(
+                      child: CustomText(
+                          fontWeight: FontWeight.normal,
+                          text: "Coming Soon",
+                          size: 35,
+                          colour: Colors.black),
                     )
                   ],
                 ),
@@ -95,9 +97,9 @@ class SampleWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       alignment: Alignment.center,
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
           color: Colors.white,
-          borderRadius: const BorderRadius.vertical(top: Radius.circular(10))),
+          borderRadius: BorderRadius.vertical(top: Radius.circular(10))),
       child: Text(label),
     );
   }
